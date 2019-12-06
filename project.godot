@@ -15,7 +15,12 @@ _global_script_class_icons={
 
 [application]
 
+config/name="Something Something Dark Side"
 run/main_scene="res://Sandbox.tscn"
+
+[autoload]
+
+Steering="*res://Autoload/Steering.gd"
 
 [input]
 

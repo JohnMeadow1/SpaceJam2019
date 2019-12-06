@@ -24,7 +24,9 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.8, 0.8 ) ]
 }
 
-[node name="Lantern" type="Area2D"]
+[node name="Lantern" type="Area2D" groups=[
+"light",
+]]
 position = Vector2( 474.67, 484.688 )
 script = ExtResource( 1 )
 
@@ -39,6 +41,7 @@ shape = SubResource( 1 )
 visible = false
 
 [node name="Light2D" type="Light2D" parent="LightScale"]
+scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 3 )
 mode = 2
 

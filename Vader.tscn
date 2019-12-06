@@ -3,7 +3,7 @@
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Flashlight.png" type="Texture" id=2]
 
-[sub_resource type="GDScript" id=2]
+[sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D
 
 func _process(delta: float) -> void:
@@ -14,16 +14,23 @@ func _process(delta: float) -> void:
 	move.y = int(Input.is_action_pressed(\"down\")) - int(Input.is_action_pressed(\"up\"))
 	
 	position += move.normalized() * 200 * delta
+
+func _input(event: InputEvent) -> void:
+	if Input.is_action_pressed(\"ui_accept\"):
+		var ligh := preload(\"res://Darkning.tscn\").instance()
+		ligh.from = position
+		ligh.to = $\"../Lantern4\".position
+		get_parent().add_child(ligh)
 "
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 29.9979, 30.4397 )
 
 [node name="Vader" type="KinematicBody2D" groups=[
 "darkside",
 ]]
 position = Vector2( 553.007, 269.216 )
-script = SubResource( 2 )
+script = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 1, 0, 0, 1 )
@@ -38,4 +45,4 @@ mode = 2
 current = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 3 )
+shape = SubResource( 2 )

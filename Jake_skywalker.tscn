@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Jake_skywalker.gd" type="Script" id=1]
 [ext_resource path="res://sounds/illNeverJoinTheDarkSide.wav" type="AudioStream" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://images/Luke-walkfront1.png" type="Texture" id=11]
 [ext_resource path="res://eyes/eye.tscn" type="PackedScene" id=12]
 [ext_resource path="res://background/Luke-www.png" type="Texture" id=13]
+[ext_resource path="res://sounds/forcepush.wav" type="AudioStream" id=14]
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -59,6 +60,9 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=2]
 radius = 25.0
 
+[sub_resource type="AudioStreamRandomPitch" id=5]
+audio_stream = ExtResource( 14 )
+
 [node name="Jake" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
@@ -71,7 +75,6 @@ material = SubResource( 4 )
 position = Vector2( 0, -80 )
 frames = SubResource( 1 )
 animation = "down"
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -100,3 +103,6 @@ position = Vector2( 10.4331, -164.199 )
 eye_size = 20
 iris_size = 10
 gravity = Vector2( 0, 100 )
+
+[node name="ForceSFX" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource( 5 )

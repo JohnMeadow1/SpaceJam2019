@@ -62,6 +62,7 @@ func _physics_process(delta: float) -> void:
 			run_away( new_direction + (global_position - darkside.get_node("Light2D").global_position) )
 			darkness += 1
 			if !$neverJoin.playing && darkness >MAX_DARKNESS :
+				$ForceSFX.play()
 				darkness = 0
 				$neverJoin.play()
 				get_dark()

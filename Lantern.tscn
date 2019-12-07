@@ -1,11 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Lantern.gd" type="Script" id=1]
 [ext_resource path="res://Lantern.png" type="Texture" id=2]
 [ext_resource path="res://LightCircle.png" type="Texture" id=3]
-
-[sub_resource type="CircleShape2D" id=1]
-radius = 48.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "Default"
@@ -24,7 +21,9 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.8, 0.8 ) ]
 }
 
-[node name="Lantern" type="Area2D"]
+[node name="Lantern" type="Node2D" groups=[
+"light",
+]]
 position = Vector2( 474.67, 484.688 )
 script = ExtResource( 1 )
 
@@ -32,13 +31,11 @@ script = ExtResource( 1 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
-
 [node name="LightScale" type="Node2D" parent="."]
 visible = false
 
 [node name="Light2D" type="Light2D" parent="LightScale"]
+scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 3 )
 mode = 2
 
@@ -46,5 +43,3 @@ mode = 2
 autoplay = "Default"
 playback_speed = 2.0
 anims/Default = SubResource( 2 )
-[connection signal="body_entered" from="." to="." method="something_entered"]
-[connection signal="body_exited" from="." to="." method="something_exited"]

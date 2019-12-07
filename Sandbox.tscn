@@ -29,7 +29,7 @@ __meta__ = {
 
 [node name="YSort" type="YSort" parent="."]
 
-[node name="Vader" parent="." instance=ExtResource( 7 )]
+[node name="Vader" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 230.011, 448.332 )
 
 [node name="AT-ST" type="StaticBody2D" parent="YSort"]
@@ -53,8 +53,8 @@ visible = false
 position = Vector2( -62.2579, -15.7245 )
 avoid_distance = 160.0
 
-[node name="Lantern2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 583.306, 800.524 )
+[node name="Lantern4" parent="YSort" instance=ExtResource( 6 )]
+position = Vector2( 821.707, 912.62 )
 
 [node name="Lantern5" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 642.583, 814.434 )

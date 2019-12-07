@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/lamp-buzzing.ogg-77331716a55fb7452e2ef17699d081bf.oggstr"
+
+[deps]
+
+source_file="res://sounds/lamp-buzzing.ogg"
+dest_files=[ "res://.import/lamp-buzzing.ogg-77331716a55fb7452e2ef17699d081bf.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

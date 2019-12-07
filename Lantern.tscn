@@ -1,10 +1,16 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Lantern.gd" type="Script" id=1]
 [ext_resource path="res://background/crystal.png" type="Texture" id=2]
 [ext_resource path="res://LightCircle.png" type="Texture" id=3]
 [ext_resource path="res://sounds/lamp-buzzing.wav" type="AudioStream" id=4]
 [ext_resource path="res://sounds/lamp-buzzing.ogg" type="AudioStream" id=5]
+[ext_resource path="res://background/crystal_anim5.png" type="Texture" id=6]
+[ext_resource path="res://background/crystal_anim4.png" type="Texture" id=7]
+[ext_resource path="res://background/crystal_anim0.png" type="Texture" id=8]
+[ext_resource path="res://background/crystal_anim1.png" type="Texture" id=9]
+[ext_resource path="res://background/crystal_anim3.png" type="Texture" id=10]
+[ext_resource path="res://background/crystal_anim2.png" type="Texture" id=11]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Default"
@@ -23,20 +29,27 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.8, 0.8 ) ]
 }
 
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
 [node name="Lantern" type="Node2D" groups=[
 "light",
 ]]
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 1, -30 )
+position = Vector2( 0, -30 )
 texture = ExtResource( 2 )
 
 [node name="LightScale" type="Node2D" parent="."]
 visible = false
 
 [node name="Light2D" type="Light2D" parent="LightScale"]
-scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 3 )
 mode = 2
 
@@ -57,4 +70,10 @@ stream = ExtResource( 5 )
 volume_db = -10.0
 max_distance = 500.0
 attenuation = 2.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -30 )
+frames = SubResource( 2 )
+frame = 4
+playing = true
 [connection signal="timeout" from="Timer" to="." method="dedark"]

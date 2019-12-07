@@ -9,7 +9,7 @@ onready var audio2: AudioStreamPlayer2D = $AudioStreamPlayer2D2
 var darkning: Node2D
 var target: Node2D
 
-const MAX_STAMINA = 2.0
+const MAX_STAMINA = 3.0
 var stamina := MAX_STAMINA
 
 func _process(delta: float) -> void:
@@ -38,8 +38,9 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("click") or Input.is_action_pressed("unlimited_power"):
 		stamina = max(stamina - delta, 0)
 	else:
-		stamina = min(stamina + delta, 2)
+		stamina = min(stamina + delta * 2, MAX_STAMINA)
 	$AnimatedSprite.material.set_shader_param("power", stamina / MAX_STAMINA);
+	$Light2D.visible = Input.is_action_pressed("click") and stamina > 0
 	
 	if stamina == 0 and darkning:
 		remove_dark()

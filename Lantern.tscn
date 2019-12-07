@@ -89,6 +89,6 @@ speed_scale = 2.0
 playing = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -21, 10, -40, -10, 38, -13, 32, 0, 17, 10 )
+polygon = PoolVector2Array( -21, 10, -40, -10, -1, -17, 38, -13, 32, 0, 17, 10 )
 [connection signal="timeout" from="Timer" to="." method="dedark"]
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

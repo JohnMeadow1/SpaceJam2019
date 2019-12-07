@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://avoid.tscn" type="PackedScene" id=1]
+[ext_resource path="res://background/stone_1.png" type="Texture" id=2]
+[ext_resource path="res://background/stone_0.png" type="Texture" id=3]
+[ext_resource path="res://DarkObject.material" type="Material" id=4]
+
+[sub_resource type="CapsuleShape2D" id=1]
+height = 64.6475
+
+[node name="stone" type="StaticBody2D"]
+
+[node name="light" type="Sprite" parent="."]
+position = Vector2( 0, -20 )
+texture = ExtResource( 3 )
+
+[node name="dark" type="Sprite" parent="."]
+material = ExtResource( 4 )
+position = Vector2( 0, -20 )
+texture = ExtResource( 2 )
+
+[node name="avoid" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -10 )
+distance = 70.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 1 )

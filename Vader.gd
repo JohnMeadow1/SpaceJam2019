@@ -11,7 +11,8 @@ var target: Node2D
 
 const MAX_STAMINA = 3.0
 var stamina := MAX_STAMINA
-
+var got_pushed := false
+var pushed_force = Vector2()
 func _process(delta: float) -> void:
 	$Light2D.rotation = (get_global_mouse_position() - $Light2D.global_position).angle()
 	
@@ -29,7 +30,14 @@ func _process(delta: float) -> void:
 		$AnimatedSprite.play("idle")
 	
 	
-	move_and_slide(move.normalized() * 200)
+	if got_pushed:
+		move_and_slide(move.normalized() * 200 + pushed_force)
+		pushed_force *= 0.9
+		if pushed_force.length_squared() <10:
+			got_pushed = false
+	else:
+		move_and_slide(move.normalized() * 200)
+	
 	
 	if darkning:
 		darkning.from = $DarkningSource.global_position
@@ -44,7 +52,12 @@ func _process(delta: float) -> void:
 	
 	if stamina == 0 and darkning:
 		remove_dark()
-
+	
+		
+func get_push(direction) -> void:
+	got_pushed = true
+	pushed_force = direction * 5
+	
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed and event.is_action("unlimited_power") and not darkning:

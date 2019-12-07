@@ -4,6 +4,7 @@ const CHARGE_MAX := 1.0
 
 onready var sprite: Sprite = $Sprite
 onready var dark: Node2D = $LightScale
+onready var timer: Timer = $Timer
 
 var dark_side_in: bool
 var charge_timer: float
@@ -11,6 +12,10 @@ var darkness_is_on:bool = false
 onready var size_in_pixels:float = $LightScale/Light2D.texture.get_size().x * scale.x
 
 func darken(delta: float) -> void:
+	if darkness_is_on:
+		timer.start()
+		return
+	
 	charge_timer += delta
 	
 	var c := 1 - charge_timer / CHARGE_MAX
@@ -19,16 +24,17 @@ func darken(delta: float) -> void:
 	if charge_timer >= CHARGE_MAX:
 		dark.show()
 		darkness_is_on = true
+		timer.start()
 
 func reset():
+	if darkness_is_on:
+		return
+	
 	charge_timer = 0
-	if not dark.visible:
-		sprite.modulate = Color.white
+	sprite.modulate = Color.white
 
-func something_entered(body: Node) -> void:
-	if body.is_in_group("darkside"):
-		dark_side_in = true
-
-func something_exited(body: Node) -> void:
-	if body.is_in_group("darkside"):
-		dark_side_in = false
+func dedark() -> void:
+	darkness_is_on = false
+	dark.hide()
+	sprite.modulate = Color.white
+	charge_timer = 0

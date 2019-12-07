@@ -14,10 +14,12 @@ var stamina := MAX_STAMINA
 var got_pushed := false
 var pushed_force = Vector2()
 var is_flashlight_on := false
-
+var stun_timer = 0 
 func _process(delta: float) -> void:
 	$Light2D.rotation = (get_global_mouse_position() - $Light2D.global_position).angle()
-	
+	if stun_timer >0:
+		stun_timer -= delta
+#	else:
 	var move: Vector2
 	move.x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left"))
 	move.y = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up"))
@@ -47,7 +49,7 @@ func _process(delta: float) -> void:
 	
 	if (Input.is_action_pressed("click") or Input.is_action_pressed("unlimited_power")) and not is_inside_lantern():
 		stamina = max(stamina - delta, 0)
-	else:
+	elif stun_timer<=0:
 		stamina = min(stamina + delta * 2, MAX_STAMINA)
 	$AnimatedSprite.material.set_shader_param("power", stamina / MAX_STAMINA);
 	is_flashlight_on = Input.is_action_pressed("click") and stamina > 0
@@ -57,6 +59,7 @@ func _process(delta: float) -> void:
 	
 		
 func get_push(direction) -> void:
+	stun_timer = 1.0
 	got_pushed = true
 	pushed_force = direction * 5
 	
@@ -112,7 +115,8 @@ func remove_dark():
 	audio.stop()
 
 func play3():
-	if !$AudioStreamPlayer2D3.playing:
+	
+	if !$AudioStreamPlayer2D3.playing && !$AudioStreamPlayer2D4.playing && !$AudioStreamPlayer2D5.playing && !$AudioStreamPlayer2D6.playing:
 		if randi() % 3 != 0:
 			return
 		

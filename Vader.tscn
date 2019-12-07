@@ -82,14 +82,14 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=11]
 animations = [ {
-"frames": [ ExtResource( 6 ), ExtResource( 5 ) ],
-"loop": true,
-"name": "right",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 8 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "right",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 9 ), ExtResource( 10 ) ],
@@ -132,7 +132,7 @@ material = SubResource( 2 )
 position = Vector2( 0, -70 )
 frames = SubResource( 10 )
 animation = "1"
-frame = 6
+frame = 1
 playing = true
 
 [node name="shadow" type="Sprite" parent="."]
@@ -144,6 +144,7 @@ material = SubResource( 2 )
 position = Vector2( 0, -70 )
 frames = SubResource( 11 )
 animation = "left"
+frame = 1
 playing = true
 
 [node name="Light2D" type="Light2D" parent="."]
@@ -171,10 +172,12 @@ attenuation = 0.217638
 
 [node name="AudioStreamPlayer2D5" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource( 14 )
+volume_db = 5.0
 attenuation = 0.217638
 
 [node name="AudioStreamPlayer2D6" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource( 15 )
+volume_db = 10.0
 attenuation = 0.217638
 
 [node name="Sprite2" type="Sprite" parent="."]

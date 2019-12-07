@@ -38,7 +38,6 @@ scale = Vector2( 2, 2 )
 distance = 150.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 19, 6 )
 rotation = -1.57009
 shape = SubResource( 2 )

@@ -48,7 +48,8 @@ func _physics_process(delta: float) -> void:
 		
 	
 	if global_position.distance_to(target_global_position) < DISTANCE_THRESHOLD:
-		set_new_target()
+		if lifes:
+			set_new_target()
 	velocity = Steering.arrive_to( velocity, global_position, target_global_position, max_speed )
 		
 	var distance_to_edge := Vector2.ZERO
@@ -63,8 +64,9 @@ func _physics_process(delta: float) -> void:
 		
 		distance_to_edge = global_position - node.global_position
 		if distance_to_edge.length() - node.distance < 0:
-			set_new_target()
-		velocity += distance_to_edge.normalized() / max(1, distance_to_edge.length() - node.distance) * max_speed
+			if lifes:
+				set_new_target()
+		velocity += (distance_to_edge.normalized() / max(1, distance_to_edge.length() - node.distance)) * max_speed
 		
 	if darkside.is_flashlight_on and lifes > 0:
 	#	velocity += (global_position - darkside.get_node("Light2D").global_position).normalized() / ((global_position - darkside.get_node("Light2D").global_position).length() + 1.0)
@@ -77,6 +79,7 @@ func _physics_process(delta: float) -> void:
 					lifes -= 1
 					if lifes == 0:
 						$AnimatedSprite.play("darkening")
+						max_speed = 150.0
 						frozen = true
 						get_tree().get_root().get_node("Game").darkside_count += 1
 						darkside.get_node("AudioStreamPlayer2D6").play()
@@ -129,7 +132,7 @@ func set_new_target():
 	var valid_target = false
 	for i in 1000: 
 		valid_target = true
-		target = Vector2( rand_range(0, 2400), rand_range(0, 2000) )
+		target = Vector2( rand_range(0, 2500), rand_range(0, 2200) )
 		for node in get_tree().get_nodes_in_group("light"):
 			if node.darkness_is_on:
 				if (node.global_position - target).length() <= node.size_in_pixels:

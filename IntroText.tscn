@@ -2,7 +2,7 @@
 
 [ext_resource path="res://fonts/comic.ttf" type="DynamicFontData" id=1]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 24
 font_data = ExtResource( 1 )
 
@@ -16,7 +16,7 @@ __meta__ = {
 [node name="introTextLabel" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.941176, 1, 0, 1 )
 text = "
 Część spacejam

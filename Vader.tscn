@@ -6,6 +6,12 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D
 
+const MAX_DISTANCE := 400.0
+const MAX_DISTANCE_SQ := MAX_DISTANCE * MAX_DISTANCE
+
+var darkning: Node2D
+var target: Node2D
+
 func _process(delta: float) -> void:
 	rotation = (get_global_mouse_position() - global_position).angle()
 	
@@ -14,13 +20,35 @@ func _process(delta: float) -> void:
 	move.y = int(Input.is_action_pressed(\"down\")) - int(Input.is_action_pressed(\"up\"))
 	
 	position += move.normalized() * 200 * delta
+	
+	if darkning:
+		darkning.from = position
+		target.darken(delta)
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_pressed(\"ui_accept\"):
-		var ligh := preload(\"res://Darkning.tscn\").instance()
-		ligh.from = position
-		ligh.to = $\"../Lantern4\".position
-		get_parent().add_child(ligh)
+	if event is InputEventKey:
+		if event.pressed and event.scancode == KEY_SPACE and not darkning:
+			var lantern: Node2D
+			var min_dist := MAX_DISTANCE_SQ
+			
+			for l in get_tree().get_nodes_in_group(\"light\"):
+				var dist := global_position.distance_squared_to(l.global_position)
+				if dist < min_dist:
+					lantern = l
+					min_dist = dist
+			
+			if lantern:
+				target = lantern
+				darkning = preload(\"res://Darkning.tscn\").instance()
+				darkning.from = position
+				darkning.to = lantern.position
+				get_parent().add_child(darkning)
+		
+		if not event.pressed and event.scancode == KEY_SPACE and darkning:
+			darkning.queue_free()
+			target.reset()
+			darkning = null
+			target = null
 "
 
 [sub_resource type="RectangleShape2D" id=2]

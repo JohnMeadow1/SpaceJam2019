@@ -17,7 +17,7 @@ extents = Vector2( 70, 169 )
 [sub_resource type="CircleShape2D" id=4]
 radius = 300.0
 
-[node name="bush" type="StaticBody2D"]
+[node name="tree" type="StaticBody2D"]
 
 [node name="light" type="Sprite" parent="."]
 position = Vector2( -25, -405.403 )

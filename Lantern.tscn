@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Lantern.gd" type="Script" id=1]
 [ext_resource path="res://background/crystal.png" type="Texture" id=2]
-[ext_resource path="res://LightCircle.png" type="Texture" id=3]
+[ext_resource path="res://LightCircle_2.png" type="Texture" id=3]
 [ext_resource path="res://sounds/lamp-buzzing.wav" type="AudioStream" id=4]
 [ext_resource path="res://sounds/lamp-buzzing.ogg" type="AudioStream" id=5]
 [ext_resource path="res://background/crystal_anim1.png" type="Texture" id=6]
@@ -37,7 +37,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Lantern" type="Node2D" groups=[
+[node name="Lantern" type="StaticBody2D" groups=[
 "light",
 ]]
 script = ExtResource( 1 )
@@ -50,7 +50,7 @@ texture = ExtResource( 2 )
 visible = false
 
 [node name="Light2D" type="Light2D" parent="LightScale"]
-scale = Vector2( 0.8, 0.8 )
+position = Vector2( 0, -10 )
 texture = ExtResource( 3 )
 mode = 2
 
@@ -79,5 +79,8 @@ frames = SubResource( 2 )
 frame = 3
 speed_scale = 2.0
 playing = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -21, 10, -40, -10, 38, -13, 32, 0, 17, 10 )
 [connection signal="timeout" from="Timer" to="." method="dedark"]
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

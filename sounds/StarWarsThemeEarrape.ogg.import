@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/StarWarsThemeEarrape.ogg-f3aecbc55f034c2e5107920ba010919b.oggstr"
+
+[deps]
+
+source_file="res://sounds/StarWarsThemeEarrape.ogg"
+dest_files=[ "res://.import/StarWarsThemeEarrape.ogg-f3aecbc55f034c2e5107920ba010919b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

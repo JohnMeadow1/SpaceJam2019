@@ -19,7 +19,7 @@ func start_text():
 	get_tree().create_timer(38).connect(\"timeout\", self, \"end\")
 
 func end():
-	get_tree().change_scene(\"res://Sandbox.tscn\")
+	get_tree().change_scene(\"res://Game.tscn\")
 "
 
 [sub_resource type="ViewportTexture" id=2]

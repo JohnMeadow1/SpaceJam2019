@@ -8,6 +8,8 @@ const DEFAULT_MASS: = 2.0
 const DEFAULT_SLOW_RADIUS: = 50.0
 const DEFAULT_MAX_SPEED: = 400.0
 
+func _init() -> void:
+	randomize()
 
 static func follow(
 		velocity: Vector2,

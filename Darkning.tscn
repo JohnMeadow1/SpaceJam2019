@@ -59,10 +59,17 @@ shader = SubResource( 1 )
 [sub_resource type="GDScript" id=3]
 script/source = "extends ColorRect
 
-var from: Vector2
+var from: Vector2 setget set_from
 var to: Vector2
 
 func _ready() -> void:
+	upd()
+
+func set_from(f):
+	from = f
+	upd()
+
+func upd():
 	rect_size.y = 256
 	rect_position = from - Vector2(0, rect_size.y / 2)
 	rect_rotation = rad2deg((to - from).angle())

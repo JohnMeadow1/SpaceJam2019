@@ -4,7 +4,7 @@
 [ext_resource path="res://Lantern.png" type="Texture" id=2]
 [ext_resource path="res://LightCircle.png" type="Texture" id=3]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "Default"
 length = 2.0
 loop = true
@@ -42,4 +42,9 @@ mode = 2
 [node name="AnimationPlayer" type="AnimationPlayer" parent="LightScale"]
 autoplay = "Default"
 playback_speed = 2.0
-anims/Default = SubResource( 2 )
+anims/Default = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+[connection signal="timeout" from="Timer" to="." method="dedark"]

@@ -9,3 +9,6 @@ func _ready() -> void:
 func set_count(c: int):
 	darkside_count = c
 	$UI/Score/Count.text = str(c, "/", full_counter)
+	
+	if c == full_counter:
+		get_tree().create_timer(12).connect("timeout", get_tree(), "change_scene", ["res://OverGame.tscn"])

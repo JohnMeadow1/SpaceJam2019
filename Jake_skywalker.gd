@@ -34,7 +34,7 @@ func _physics_process(delta: float) -> void:
 		can_talk = bool(randi()%100<1)
 		
 	if darkness>0:
-		darkness-=delta *10
+		darkness = max (0, darkness - delta *10)
 	$eyes.position = Vector2 (rand_range(-1,1),rand_range(-1,1))
 #
 #	if Input.is_action_pressed("click"):
@@ -54,19 +54,19 @@ func _physics_process(delta: float) -> void:
 	for node in get_tree().get_nodes_in_group("avoid"):
 		distance_to_edge = global_position - node.global_position
 		velocity += distance_to_edge.normalized() / max(1, distance_to_edge.length() - node.distance) * max_speed
-	
-	velocity += (global_position - darkside.get_node("Light2D").global_position).normalized() / ((global_position - darkside.get_node("Light2D").global_position).length() + 1.0)
-	if global_position.distance_to(darkside.get_node("Light2D").global_position) < DARKSIDE_THRESHOLD:
-		if abs(darkside.get_node("Light2D").rotation - (global_position - darkside.get_node("Light2D").global_position).angle()) < PI/4.0:
-			var new_direction = (global_position - darkside.global_position).tangent() * sign (darkside.get_node("Light2D").rotation - (global_position - darkside.get_node("Light2D").global_position).angle())
-			run_away( new_direction + (global_position - darkside.get_node("Light2D").global_position) )
-			darkness += 1
-			if !$neverJoin.playing && darkness >MAX_DARKNESS :
-				$ForceSFX.play()
-				darkness = 0
-				$neverJoin.play()
-				get_dark()
-				darkside.get_push(darkside.get_node("Light2D").global_position - global_position)
+	if darkside.is_flashlight_on:
+	#	velocity += (global_position - darkside.get_node("Light2D").global_position).normalized() / ((global_position - darkside.get_node("Light2D").global_position).length() + 1.0)
+		if global_position.distance_to(darkside.get_node("Light2D").global_position) < DARKSIDE_THRESHOLD:
+			if abs(darkside.get_node("Light2D").rotation - (global_position - darkside.get_node("Light2D").global_position).angle()) < PI/4.0:
+				var new_direction = (global_position - darkside.global_position).tangent() * sign (darkside.get_node("Light2D").rotation - (global_position - darkside.get_node("Light2D").global_position).angle())
+				run_away( new_direction + (global_position - darkside.get_node("Light2D").global_position) )
+				darkness += 1
+				if !$neverJoin.playing && darkness >MAX_DARKNESS :
+					$ForceSFX.play()
+					darkness = 0
+					$neverJoin.play()
+					get_dark()
+					darkside.get_push(darkside.get_node("Light2D").global_position - global_position)
 				
 		
 	$target.global_position = target_global_position
@@ -81,7 +81,8 @@ func get_dark():
 	can_talk = false
 	
 func rotate_actor():
-	var direction:int = round(((velocity.angle() + PI*1.5) / PI) * 2)
+#	var direction:int = round(((velocity.angle() + PI*1.5) / PI) * 2)
+	var direction = int(round(((velocity.angle() + PI) / PI) * 2))
 	match direction:
 		1:$AnimatedSprite.play("left")
 		2:$AnimatedSprite.play("up")

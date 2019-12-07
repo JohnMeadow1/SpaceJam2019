@@ -13,6 +13,8 @@ const MAX_STAMINA = 3.0
 var stamina := MAX_STAMINA
 var got_pushed := false
 var pushed_force = Vector2()
+var is_flashlight_on := false
+
 func _process(delta: float) -> void:
 	$Light2D.rotation = (get_global_mouse_position() - $Light2D.global_position).angle()
 	
@@ -48,8 +50,8 @@ func _process(delta: float) -> void:
 	else:
 		stamina = min(stamina + delta * 2, MAX_STAMINA)
 	$AnimatedSprite.material.set_shader_param("power", stamina / MAX_STAMINA);
-	$Light2D.visible = Input.is_action_pressed("click") and stamina > 0
-	
+	is_flashlight_on = Input.is_action_pressed("click") and stamina > 0
+	$Light2D.visible = is_flashlight_on
 	if stamina == 0 and darkning:
 		remove_dark()
 	

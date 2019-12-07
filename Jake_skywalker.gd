@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 const DISTANCE_THRESHOLD: = 3.0
-const DARKSIDE_THRESHOLD: = 300.0
+const DARKSIDE_THRESHOLD: = 500.0
 export var max_speed: = 200.0
 
 var target_global_position: = Vector2.ZERO setget set_target_global_position
@@ -18,30 +18,39 @@ func _ready() -> void:
 	set_new_target()
 
 func _physics_process(delta: float) -> void:
-	if timer < 2.0:
-		timer += delta
-	else:
-		timer = 0.0
-		timeout = rand_range(1.5,2.5)
-		set_new_target()
+#	if timer < 2.0:
+#		timer += delta
+#	else:
+#		timer = 0.0
+#		timeout = rand_range(1.5,2.5)
+#		set_new_target()
 		
 	if Input.is_action_pressed("click"):
 		self.target_global_position = get_global_mouse_position()
 		
+	
 	if global_position.distance_to(target_global_position) < DISTANCE_THRESHOLD:
 		set_new_target()
-		
 	velocity = Steering.arrive_to( velocity, global_position, target_global_position, max_speed )
+		
+	var distance_to_edge := Vector2.ZERO
 	for node in get_tree().get_nodes_in_group("light"):
 		if node.darkness_is_on:
-			if (node.global_position - (global_position+velocity)).length() <= node.size_in_pixels:
-				run_away(global_position - node.global_position)
-			
+			distance_to_edge = global_position - node.global_position
+			if distance_to_edge.length() - node.size_in_pixels  <= 0:
+				velocity += distance_to_edge.normalized() / distance_to_edge.length_squared()
+				
+	for node in get_tree().get_nodes_in_group("avoid"):
+			distance_to_edge = global_position - node.global_position
+			if distance_to_edge.length() - node.distance  <= 0:
+				velocity += distance_to_edge.normalized() / distance_to_edge.length_squared()
 			
 	if global_position.distance_to(darkside.global_position) < DARKSIDE_THRESHOLD:
-		run_away( (global_position - darkside.global_position) )
-		if !$neverJoin.playing:
-			$neverJoin.play()
+#		print (darkside.rotation - (global_position - darkside.global_position).angle())
+		if abs(darkside.rotation - (global_position - darkside.global_position).angle()) < PI/4.0:
+			run_away( (global_position - darkside.global_position) )
+			if !$neverJoin.playing:
+				$neverJoin.play()
 		
 	$target.global_position = target_global_position
 	velocity = move_and_slide(velocity)
@@ -60,15 +69,15 @@ func set_new_target():
 	var valid_target = false
 	for i in 1000: 
 		valid_target = true
-		target = Vector2( rand_range(-300, 300), rand_range(-300, 300) )
+		target = Vector2( rand_range(0, 2000), rand_range(0, 2000) )
 		for node in get_tree().get_nodes_in_group("light"):
 			if node.darkness_is_on:
-				if (node.global_position - (global_position+target)).length() <= node.size_in_pixels:
+				if (node.global_position - (target)).length() <= node.size_in_pixels:
 					valid_target = false
 		if valid_target:
 			break
 					
-	set_target_global_position( global_position + target )
+	set_target_global_position( target )
 	
 func run_away(value: Vector2) -> void:
 	set_target_global_position( global_position + value.normalized() * max_speed)

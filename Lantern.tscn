@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Lantern.gd" type="Script" id=1]
-[ext_resource path="res://Lantern.png" type="Texture" id=2]
+[ext_resource path="res://background/crystal.png" type="Texture" id=2]
 [ext_resource path="res://LightCircle.png" type="Texture" id=3]
 [ext_resource path="res://sounds/lamp-buzzing.wav" type="AudioStream" id=4]
 [ext_resource path="res://sounds/lamp-buzzing.ogg" type="AudioStream" id=5]
@@ -26,11 +26,10 @@ tracks/0/keys = {
 [node name="Lantern" type="Node2D" groups=[
 "light",
 ]]
-position = Vector2( 474.67, 484.688 )
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.3, 0.3 )
+position = Vector2( 1, -30 )
 texture = ExtResource( 2 )
 
 [node name="LightScale" type="Node2D" parent="."]

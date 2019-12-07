@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://background/image0.png" type="Texture" id=1]
 [ext_resource path="res://avoid.tscn" type="PackedScene" id=2]
-[ext_resource path="res://avoid.gd" type="Script" id=3]
 [ext_resource path="res://background/image0dark.png" type="Texture" id=4]
 
 [sub_resource type="CanvasItemMaterial" id=1]
@@ -30,9 +29,7 @@ visible = false
 position = Vector2( 26.5368, 37.0119 )
 polygon = PoolVector2Array( -241.615, -93.2494, -101.5, -130.202, 0.58371, -65.4558, 14.4862, -68.6335, 64.138, -36.4591, -12.5979, 20.024, -37.1776, 95.0237, -92.6396, 84.3094, -122.261, 40.8222, -243.269, -32.2867 )
 
-[node name="avoid" type="Node2D" parent="." groups=[
-"avoid",
-] instance=ExtResource( 2 )]
+[node name="avoid" parent="." instance=ExtResource( 2 )]
 visible = false
 position = Vector2( -62.2579, -15.7245 )
-script = ExtResource( 3 )
+distance = 100.0

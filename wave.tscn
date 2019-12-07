@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="C:\repositories\SpaceJam2019\images\force_push.png" type="SpriteFrames" id=1]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float power : hint_range(0, 1);
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	float gray = (color.r + color.g + color.b) / 6.0;
+	
+	float result = ceil(1.0 - power - UV.y);
+	
+	COLOR = mix(vec4(gray, gray, gray, color.a), color, result);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/power = 0.0
+
+[node name="Force_push" type="AnimatedSprite"]
+material = SubResource( 2 )
+position = Vector2( 0, -80 )
+frames = ExtResource( 1 )
+animation = "push"
+frame = 5
+playing = true

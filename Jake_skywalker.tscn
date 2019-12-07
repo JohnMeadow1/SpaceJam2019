@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Jake_skywalker.gd" type="Script" id=1]
 [ext_resource path="res://sounds/illNeverJoinTheDarkSide.wav" type="AudioStream" id=2]
@@ -14,8 +14,9 @@
 [ext_resource path="res://eyes/eye.tscn" type="PackedScene" id=12]
 [ext_resource path="res://background/Luke-www.png" type="Texture" id=13]
 [ext_resource path="res://sounds/forcepush.wav" type="AudioStream" id=14]
+[ext_resource path="res://images/force_push.png" type="Texture" id=15]
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform float power : hint_range(0, 1);
@@ -29,12 +30,12 @@ void fragment() {
 	COLOR = mix(vec4(gray, gray, gray, color.a), color, result);
 }"
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
-shader = SubResource( 3 )
+shader = SubResource( 1 )
 shader_param/power = 0.0
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ ExtResource( 9 ), ExtResource( 4 ) ],
 "loop": true,
@@ -57,11 +58,54 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=4]
 radius = 25.0
 
 [sub_resource type="AudioStreamRandomPitch" id=5]
 audio_stream = ExtResource( 14 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 100, 200 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 15 )
+region = Rect2( 100, 0, 100, 200 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 15 )
+region = Rect2( 200, 0, 100, 200 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 15 )
+region = Rect2( 300, 0, 100, 200 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 15 )
+region = Rect2( 400, 0, 100, 200 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 15 )
+region = Rect2( 500, 0, 100, 200 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 4
+atlas = ExtResource( 15 )
+region = Rect2( 600, 0, 100, 200 )
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"loop": true,
+"name": "push",
+"speed": 20.0
+} ]
 
 [node name="Jake" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -71,14 +115,14 @@ position = Vector2( 0, 10 )
 texture = ExtResource( 13 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-material = SubResource( 4 )
+material = SubResource( 2 )
 position = Vector2( 0, -80 )
-frames = SubResource( 1 )
+frames = SubResource( 3 )
 animation = "down"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="target" type="Sprite" parent="."]
 visible = false
@@ -106,3 +150,12 @@ gravity = Vector2( 0, 100 )
 
 [node name="ForceSFX" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource( 5 )
+
+[node name="Force_push" type="AnimatedSprite" parent="."]
+visible = false
+material = SubResource( 2 )
+position = Vector2( 0, -80 )
+frames = SubResource( 13 )
+animation = "push"
+frame = 1
+playing = true

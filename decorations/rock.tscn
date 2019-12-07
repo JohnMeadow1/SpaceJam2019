@@ -25,5 +25,4 @@ visible = false
 polygon = PoolVector2Array( -1.09818, 55.3852, -87.7338, 64.6511, -124.334, 47.046, -137.306, -3.91617, -42.3312, -24.301, 60.5197, -24.7643, 137.889, -4.84276, 123.527, 45.1928, 60.983, 66.9675 )
 
 [node name="avoid" parent="." instance=ExtResource( 4 )]
-visible = false
 distance = 150.0

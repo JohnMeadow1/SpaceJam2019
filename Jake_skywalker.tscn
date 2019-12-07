@@ -15,14 +15,14 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 5 ), ExtResource( 7 ) ],
-"loop": true,
-"name": "right",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 9 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "right",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 10 ), ExtResource( 6 ) ],
@@ -58,6 +58,7 @@ texture = ExtResource( 3 )
 
 [node name="neverJoin" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
+volume_db = 5.0
 
 [node name="eyes" type="Node2D" parent="."]
 visible = false

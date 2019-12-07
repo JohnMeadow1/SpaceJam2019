@@ -119,7 +119,6 @@ material = SubResource( 2 )
 position = Vector2( 0, -80 )
 frames = SubResource( 3 )
 animation = "down"
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -158,7 +157,7 @@ material = SubResource( 2 )
 position = Vector2( 0, -80 )
 frames = SubResource( 13 )
 animation = "push"
-frame = 3
+frame = 4
 playing = true
 
 [node name="Tween" type="Tween" parent="Force_push"]

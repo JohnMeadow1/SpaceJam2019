@@ -89,13 +89,16 @@ func get_dark():
 	can_talk = false
 	
 func rotate_actor():
-#	var direction:int = round(((velocity.angle() + PI*1.5) / PI) * 2)
-	var direction = int(round(((velocity.angle() + PI) / PI) * 2))
-	match direction:
-		1:$AnimatedSprite.play("left")
-		2:$AnimatedSprite.play("up")
-		3:$AnimatedSprite.play("right")
-		4:$AnimatedSprite.play("down")
+	if abs(velocity.x) > abs(velocity.y):
+		if velocity.x < 0:
+			$AnimatedSprite.play("left")
+		else:
+			$AnimatedSprite.play("right")
+	else:
+		if velocity.y < 0:
+			$AnimatedSprite.play("up")
+		else:
+			$AnimatedSprite.play("down")
 	
 func set_new_target():
 	var target = Vector2.ZERO

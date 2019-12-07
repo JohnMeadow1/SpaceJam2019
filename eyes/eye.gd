@@ -26,8 +26,9 @@ func set_gravity(value):
 	gravity = value
 	
 func update_threshold():
-	previous_position = global_position 
-	distance_threshold = ( eye_size * 0.5 - eye_size * 0.06 ) - ( iris_size * 0.5 )
+	if is_inside_tree():
+			previous_position = global_position 
+			distance_threshold = ( eye_size * 0.5 - eye_size * 0.06 ) - ( iris_size * 0.5 )
 	
 func _physics_process(delta):
 	global_rotation = 0

@@ -52,9 +52,10 @@ func _physics_process(delta: float) -> void:
 		if abs(darkside.get_node("Light2D").rotation - (global_position - darkside.global_position).angle()) < PI/8.0:
 			var new_direction = (global_position - darkside.global_position).tangent() * sign (darkside.get_node("Light2D").rotation - (global_position - darkside.global_position).angle())
 			run_away( new_direction )
-			
+			get_dark()
 			if !$neverJoin.playing:
 				$neverJoin.play()
+				
 		
 	$target.global_position = target_global_position
 	velocity = move_and_slide(velocity)

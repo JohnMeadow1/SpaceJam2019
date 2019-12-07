@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Jake_skywalker.gd" type="Script" id=1]
 [ext_resource path="res://sounds/illNeverJoinTheDarkSide.wav" type="AudioStream" id=2]
@@ -12,17 +12,18 @@
 [ext_resource path="res://images/Luke-walkback1.png" type="Texture" id=10]
 [ext_resource path="res://images/Luke-walkfront1.png" type="Texture" id=11]
 [ext_resource path="res://eyes/eye.tscn" type="PackedScene" id=12]
+[ext_resource path="res://background/Luke-www.png" type="Texture" id=13]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 9 ), ExtResource( 4 ) ],
-"loop": true,
-"name": "left",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 5 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "left",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 10 ), ExtResource( 6 ) ],
@@ -41,6 +42,10 @@ radius = 31.5998
 
 [node name="Jake" type="KinematicBody2D"]
 script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 10 )
+texture = ExtResource( 13 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -80 )

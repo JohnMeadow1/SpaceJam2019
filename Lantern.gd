@@ -12,6 +12,10 @@ var darkness_is_on:bool = false
 onready var size_in_pixels:float = $LightScale/Light2D.texture.get_size().x * scale.x
 
 func darken(delta: float) -> void:
+	if not $AnimatedSprite.visible:
+		$AnimatedSprite.frame = 0
+		$AnimatedSprite.show()
+	
 	if darkness_is_on:
 		timer.start()
 		return
@@ -27,9 +31,6 @@ func darken(delta: float) -> void:
 		timer.start()
 		$AudioStreamPlayer2D.play()
 		$AudioStreamPlayer2D2.play()
-		$AnimatedSprite.show()
-		$AnimatedSprite.frame = 0
-		$AnimatedSprite.play("default")
 
 func reset():
 	if darkness_is_on:

@@ -32,7 +32,7 @@ tracks/0/keys = {
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 11 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 7 ) ],
-"loop": false,
+"loop": true,
 "name": "default",
 "speed": 5.0
 } ]
@@ -76,6 +76,8 @@ attenuation = 2.0
 visible = false
 position = Vector2( 1, -30 )
 frames = SubResource( 2 )
+frame = 3
 speed_scale = 2.0
+playing = true
 [connection signal="timeout" from="Timer" to="." method="dedark"]
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

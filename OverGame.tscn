@@ -1,8 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://fonts/Starjedi.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://background/baby-yoda.png" type="Texture" id=2]
 [ext_resource path="res://sounds/StarWarsThemeEarrape.ogg" type="AudioStream" id=3]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends TextureRect
+
+func _ready() -> void:
+	get_tree().set_auto_accept_quit(false)
+"
 
 [sub_resource type="DynamicFont" id=1]
 size = 120
@@ -15,6 +22,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 2 )
 expand = true
+script = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -45,7 +45,7 @@ func _process(delta: float) -> void:
 		darkning.from = $DarkningSource.global_position
 		target.darken(delta)
 	
-	if Input.is_action_pressed("click") or Input.is_action_pressed("unlimited_power"):
+	if (Input.is_action_pressed("click") or Input.is_action_pressed("unlimited_power")) and not is_inside_lantern():
 		stamina = max(stamina - delta, 0)
 	else:
 		stamina = min(stamina + delta * 2, MAX_STAMINA)
@@ -97,6 +97,12 @@ func _input(event: InputEvent) -> void:
 		
 		if event.pressed and event.is_action("click"):
 			play3()
+
+func is_inside_lantern():
+	for lantern in get_tree().get_nodes_in_group("light"):
+		if lantern.darkness_is_on and global_position.distance_to(lantern.global_position) <= lantern.size_in_pixels / 2:
+			return true
+	return false
 
 func remove_dark():
 	darkning.queue_free()

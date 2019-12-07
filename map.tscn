@@ -19,13 +19,14 @@
 [ext_resource path="res://decorations/bunker.gd" type="Script" id=17]
 [ext_resource path="res://decorations/FadeObject.gd" type="Script" id=18]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 1064.74, 100 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 628.072, 100 )
 
 [node name="YSort" type="YSort"]
+position = Vector2( 0, -3.09082 )
 
 [node name="Vader" type="KinematicBody2D" parent="." groups=[
 "darkside",
@@ -41,6 +42,47 @@ limit_right = 2800
 limit_bottom = 2400
 editor_draw_limits = true
 
+[node name="Jakes" type="YSort" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Jake" type="KinematicBody2D" parent="Jakes" groups=[
+"lukes",
+] instance=ExtResource( 4 )]
+position = Vector2( 1782.44, 720.916 )
+script = ExtResource( 13 )
+
+[node name="Jake2" type="KinematicBody2D" parent="Jakes" groups=[
+"lukes",
+] instance=ExtResource( 4 )]
+position = Vector2( 241.239, 1730.49 )
+script = ExtResource( 13 )
+
+[node name="Jake3" type="KinematicBody2D" parent="Jakes" groups=[
+"lukes",
+] instance=ExtResource( 4 )]
+position = Vector2( 1182.19, 584.99 )
+script = ExtResource( 13 )
+
+[node name="Jake6" type="KinematicBody2D" parent="Jakes" groups=[
+"lukes",
+] instance=ExtResource( 4 )]
+position = Vector2( 1295.49, 1864.46 )
+script = ExtResource( 13 )
+
+[node name="Jake4" type="KinematicBody2D" parent="Jakes" groups=[
+"lukes",
+] instance=ExtResource( 4 )]
+position = Vector2( 1859.16, 1905.46 )
+script = ExtResource( 13 )
+
+[node name="Jake5" type="KinematicBody2D" parent="Jakes" groups=[
+"lukes",
+] instance=ExtResource( 4 )]
+position = Vector2( 2086.76, 1567.58 )
+script = ExtResource( 13 )
+
 [node name="bush4" type="StaticBody2D" parent="." instance=ExtResource( 6 )]
 position = Vector2( 2169.77, 2316.97 )
 
@@ -51,7 +93,7 @@ position = Vector2( 2186.34, 116.577 )
 position = Vector2( -164.716, 1021.16 )
 
 [node name="v_bush2" type="StaticBody2D" parent="." instance=ExtResource( 15 )]
-position = Vector2( -141.333, 1640.25 )
+position = Vector2( -141.333, 1642.1 )
 scale = Vector2( -1, 1 )
 
 [node name="v_bush4" type="StaticBody2D" parent="." instance=ExtResource( 15 )]
@@ -67,7 +109,7 @@ rotation = -3.14159
 scale = Vector2( 1, -1 )
 
 [node name="bush32" type="StaticBody2D" parent="." instance=ExtResource( 6 )]
-position = Vector2( 1424.7, 2306.29 )
+position = Vector2( 1441.28, 2334.93 )
 rotation = -3.14159
 scale = Vector2( 1, -1 )
 
@@ -83,7 +125,7 @@ position = Vector2( 31.1716, 154.194 )
 position = Vector2( 280.28, 155.781 )
 
 [node name="bush30" type="StaticBody2D" parent="." instance=ExtResource( 6 )]
-position = Vector2( 1654.89, 2333.95 )
+position = Vector2( 1653.38, 2338.47 )
 scale = Vector2( 1.3, 1.3 )
 
 [node name="bush31" type="StaticBody2D" parent="." instance=ExtResource( 6 )]
@@ -91,8 +133,11 @@ position = Vector2( 2720.94, 1154.81 )
 scale = Vector2( 1.3, 1.3 )
 
 [node name="bush34" type="StaticBody2D" parent="." instance=ExtResource( 6 )]
-position = Vector2( 1213.29, 2328.71 )
+position = Vector2( 1232.89, 2352.83 )
 scale = Vector2( 1.3, 1.3 )
+
+[node name="bush35" type="StaticBody2D" parent="." instance=ExtResource( 6 )]
+position = Vector2( 400.124, 2013.01 )
 
 [node name="bush28" type="StaticBody2D" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1936.66, 2306.35 )
@@ -124,7 +169,7 @@ position = Vector2( 2606.17, 363.78 )
 scale = Vector2( -1, 1 )
 
 [node name="AT-ST4" type="StaticBody2D" parent="." instance=ExtResource( 8 )]
-position = Vector2( 1571.97, 1323.13 )
+position = Vector2( 1608.8, 1361.19 )
 
 [node name="AT-ST2" type="StaticBody2D" parent="." instance=ExtResource( 8 )]
 position = Vector2( 427.463, -32.7811 )
@@ -144,10 +189,10 @@ position = Vector2( 2784.14, 1242.43 )
 scale = Vector2( -1, 1 )
 
 [node name="rock2" type="StaticBody2D" parent="." instance=ExtResource( 10 )]
-position = Vector2( 518.861, 519.456 )
+position = Vector2( 518.861, 517.184 )
 
 [node name="bunker" type="StaticBody2D" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1537.92, 85.8752 )
+position = Vector2( 1537.92, 84.1171 )
 script = ExtResource( 17 )
 
 [node name="Tree" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
@@ -155,11 +200,12 @@ position = Vector2( -158.255, 351.04 )
 script = ExtResource( 18 )
 
 [node name="Tree2" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
-position = Vector2( 3435.08, 934.443 )
+position = Vector2( 2886.52, 929.143 )
+scale = Vector2( -1, 1 )
 script = ExtResource( 18 )
 
 [node name="Tree3" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
-position = Vector2( 240.487, 20.0247 )
+position = Vector2( 240.487, 17.7526 )
 script = ExtResource( 18 )
 
 [node name="Tree4" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
@@ -192,11 +238,21 @@ position = Vector2( -19.0359, 266.172 )
 [node name="stump3" type="StaticBody2D" parent="." instance=ExtResource( 14 )]
 position = Vector2( 2156.06, 1130.46 )
 
+[node name="stump4" type="StaticBody2D" parent="." instance=ExtResource( 14 )]
+position = Vector2( 406.938, 788.018 )
+
+[node name="stump5" type="StaticBody2D" parent="." instance=ExtResource( 14 )]
+position = Vector2( 430.429, 2041.83 )
+scale = Vector2( -1, 1 )
+
+[node name="stump6" type="StaticBody2D" parent="." instance=ExtResource( 14 )]
+position = Vector2( 513.811, 1975.51 )
+
 [node name="bush18" type="StaticBody2D" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1339.69, 1362.7 )
 
 [node name="stone2" type="StaticBody2D" parent="." instance=ExtResource( 16 )]
-position = Vector2( 1697.17, 1391.74 )
+position = Vector2( 2026.2, 1377.01 )
 
 [node name="Lanturns" type="YSort" parent="."]
 
@@ -239,7 +295,7 @@ script = ExtResource( 12 )
 [node name="Lantern9" type="StaticBody2D" parent="Lanturns" groups=[
 "light",
 ] instance=ExtResource( 9 )]
-position = Vector2( 853.083, 1067.9 )
+position = Vector2( 2189.43, 1091.28 )
 scale = Vector2( -1, 1 )
 script = ExtResource( 12 )
 
@@ -253,13 +309,13 @@ script = ExtResource( 12 )
 [node name="Lantern11" type="StaticBody2D" parent="Lanturns" groups=[
 "light",
 ] instance=ExtResource( 9 )]
-position = Vector2( 91.0398, 2146.6 )
+position = Vector2( 36.7754, 2197.85 )
 script = ExtResource( 12 )
 
 [node name="Lantern12" type="StaticBody2D" parent="Lanturns" groups=[
 "light",
 ] instance=ExtResource( 9 )]
-position = Vector2( 943.07, 2221.9 )
+position = Vector2( 947.592, 2264.11 )
 scale = Vector2( -1, 1 )
 script = ExtResource( 12 )
 
@@ -279,13 +335,13 @@ script = ExtResource( 12 )
 [node name="Lantern16" type="StaticBody2D" parent="Lanturns" groups=[
 "light",
 ] instance=ExtResource( 9 )]
-position = Vector2( 1712.45, 1575.57 )
+position = Vector2( 1595.81, 1467.53 )
 script = ExtResource( 12 )
 
 [node name="Lantern18" type="StaticBody2D" parent="Lanturns" groups=[
 "light",
 ] instance=ExtResource( 9 )]
-position = Vector2( 1242.41, 1168.51 )
+position = Vector2( 1285.27, 1283.44 )
 script = ExtResource( 12 )
 
 [node name="Lantern14" type="StaticBody2D" parent="Lanturns" groups=[
@@ -293,47 +349,6 @@ script = ExtResource( 12 )
 ] instance=ExtResource( 9 )]
 position = Vector2( 2632.79, 1229.54 )
 script = ExtResource( 12 )
-
-[node name="Jakes" type="YSort" parent="."]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Jake" type="KinematicBody2D" parent="Jakes" groups=[
-"lukes",
-] instance=ExtResource( 4 )]
-position = Vector2( 1782.44, 720.916 )
-script = ExtResource( 13 )
-
-[node name="Jake2" type="KinematicBody2D" parent="Jakes" groups=[
-"lukes",
-] instance=ExtResource( 4 )]
-position = Vector2( -544.901, -689.279 )
-script = ExtResource( 13 )
-
-[node name="Jake3" type="KinematicBody2D" parent="Jakes" groups=[
-"lukes",
-] instance=ExtResource( 4 )]
-position = Vector2( 1182.19, 584.99 )
-script = ExtResource( 13 )
-
-[node name="Jake6" type="KinematicBody2D" parent="Jakes" groups=[
-"lukes",
-] instance=ExtResource( 4 )]
-position = Vector2( 1295.49, 1864.46 )
-script = ExtResource( 13 )
-
-[node name="Jake4" type="KinematicBody2D" parent="Jakes" groups=[
-"lukes",
-] instance=ExtResource( 4 )]
-position = Vector2( 1859.16, 1905.46 )
-script = ExtResource( 13 )
-
-[node name="Jake5" type="KinematicBody2D" parent="Jakes" groups=[
-"lukes",
-] instance=ExtResource( 4 )]
-position = Vector2( 2086.76, 1567.58 )
-script = ExtResource( 13 )
 
 [node name="Tree6" type="StaticBody2D" parent="." instance=ExtResource( 2 )]
 position = Vector2( 2624.85, -41.6479 )
@@ -359,7 +374,7 @@ position = Vector2( 2576.8, 2301.68 )
 script = ExtResource( 18 )
 
 [node name="Tree7" type="StaticBody2D" parent="." instance=ExtResource( 2 )]
-position = Vector2( 877.011, 2339 )
+position = Vector2( 877.011, 2340.59 )
 script = ExtResource( 18 )
 
 [node name="Tree10" type="StaticBody2D" parent="." instance=ExtResource( 2 )]
@@ -371,13 +386,13 @@ position = Vector2( 1120.2, -623.448 )
 script = ExtResource( 18 )
 
 [node name="Tree9" type="StaticBody2D" parent="." instance=ExtResource( 2 )]
-position = Vector2( 2814.13, 2175.41 )
+position = Vector2( 2815.64, 2173.9 )
 rotation = -3.14159
 scale = Vector2( 1, -1 )
 script = ExtResource( 18 )
 
 [node name="Tree11" type="StaticBody2D" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1425.36, 1418.45 )
+position = Vector2( 1425.36, 1417.22 )
 rotation = -3.14159
 scale = Vector2( 1, -1 )
 script = ExtResource( 18 )
@@ -420,9 +435,9 @@ scale = Vector2( 1, -1 )
 script = ExtResource( 18 )
 
 [node name="tree" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
-position = Vector2( -851.786, 946.494 )
+position = Vector2( -257.083, 1726.65 )
 rotation = -3.14159
-scale = Vector2( 0.7, -0.7 )
+scale = Vector2( -0.7, -0.7 )
 script = ExtResource( 18 )
 
 [node name="tree2" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
@@ -432,7 +447,7 @@ scale = Vector2( 0.7, -0.7 )
 script = ExtResource( 18 )
 
 [node name="tree7" type="StaticBody2D" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1680.15, 1298.36 )
+position = Vector2( 1680.15, 1304.5 )
 rotation = -3.14159
 scale = Vector2( 0.7, -0.7 )
 script = ExtResource( 18 )
@@ -446,13 +461,14 @@ scale = Vector2( 1, -1 )
 position = Vector2( 2616.93, 90.7434 )
 
 [node name="walls" type="StaticBody2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls"]
 position = Vector2( 1871.4, 2402.48 )
 z_index = 1
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="walls"]
 position = Vector2( 502.149, -14.3651 )
 z_index = 1
-shape = SubResource( 4 )
+shape = SubResource( 3 )

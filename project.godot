@@ -29,6 +29,7 @@ gdscript/warnings/enable=false
 
 [display]
 
+window/size/borderless=true
 window/dpi/allow_hidpi=true
 
 [input]

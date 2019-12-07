@@ -32,4 +32,4 @@ polygon = PoolVector2Array( -241.615, -93.2494, -101.5, -130.202, 0.58371, -65.4
 [node name="avoid" parent="." instance=ExtResource( 2 )]
 visible = false
 position = Vector2( -62.2579, -15.7245 )
-distance = 100.0
+distance = 200.0

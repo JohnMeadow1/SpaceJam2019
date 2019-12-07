@@ -40,18 +40,17 @@ func _physics_process(delta: float) -> void:
 		if node.darkness_is_on:
 			distance_to_edge = global_position - node.global_position
 			if distance_to_edge.length() - node.size_in_pixels  <= 0:
-				velocity += distance_to_edge.normalized() / distance_to_edge.length_squared()
+				velocity += distance_to_edge.normalized() /  max(1, distance_to_edge.length() - node.size_in_pixels) * max_speed
 				
 	for node in get_tree().get_nodes_in_group("avoid"):
-			distance_to_edge = global_position - node.global_position
-			if distance_to_edge.length() - node.distance  <= 0:
-				velocity += distance_to_edge.normalized() / distance_to_edge.length_squared()
+		distance_to_edge = global_position - node.global_position
+		velocity += distance_to_edge.normalized() / max(1, distance_to_edge.length() - node.distance) * max_speed
 	
-	velocity += (global_position - darkside.global_position).normalized() / ((global_position - darkside.global_position).length_squared() + 1.0)
+	velocity += (global_position - darkside.global_position).normalized() / ((global_position - darkside.global_position).length() + 1.0)
 	if global_position.distance_to(darkside.global_position) < DARKSIDE_THRESHOLD:
-		if abs(darkside.get_node("Light2D").rotation - (global_position - darkside.global_position).angle()) < PI/8.0:
+		if abs(darkside.get_node("Light2D").rotation - (global_position - darkside.global_position).angle()) < PI/4.0:
 			var new_direction = (global_position - darkside.global_position).tangent() * sign (darkside.get_node("Light2D").rotation - (global_position - darkside.global_position).angle())
-			run_away( new_direction )
+			run_away( new_direction + (global_position - darkside.global_position) )
 			get_dark()
 			if !$neverJoin.playing:
 				$neverJoin.play()
@@ -78,18 +77,21 @@ func set_new_target():
 	var valid_target = false
 	for i in 1000: 
 		valid_target = true
-		target = Vector2( rand_range(0, 2000), rand_range(0, 2000) )
+		target = Vector2( rand_range(0, 2000), rand_range(0, 1000) )
 		for node in get_tree().get_nodes_in_group("light"):
 			if node.darkness_is_on:
-				if (node.global_position - (target)).length() <= node.size_in_pixels:
+				if (node.global_position - target).length() <= node.size_in_pixels:
 					valid_target = false
+		for node in get_tree().get_nodes_in_group("avoid"):
+			if (node.global_position - target).length() <= node.distance:
+				valid_target = false
 		if valid_target:
 			break
 					
 	set_target_global_position( target )
 	
 func run_away(value: Vector2) -> void:
-	set_target_global_position( global_position + value.normalized() * max_speed)
+	set_target_global_position( global_position + value.normalized() * 100)
 	
 func set_target_global_position(value: Vector2) -> void:
 	target_global_position = value

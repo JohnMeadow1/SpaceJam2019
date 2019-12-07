@@ -59,21 +59,6 @@ limit_right = 2200
 limit_bottom = 1600
 editor_draw_limits = true
 
-[node name="Jake" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 1290.57, 766.517 )
-
-[node name="Jake2" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 1337.33, 181.952 )
-
-[node name="Jake3" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 520.61, 990.322 )
-
-[node name="Jake4" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 1611.24, 1217.47 )
-
-[node name="Jake5" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 849.637, 1292.63 )
-
 [node name="AT-ST" parent="YSort" instance=ExtResource( 3 )]
 position = Vector2( -486.731, -228.357 )
 
@@ -141,6 +126,26 @@ position = Vector2( 866.908, -882.046 )
 
 [node name="Lantern11" parent="YSort/Lanturns" instance=ExtResource( 1 )]
 position = Vector2( -200.234, 1505.92 )
+
+[node name="Jakes" type="YSort" parent="YSort"]
+
+[node name="Jake" parent="YSort/Jakes" instance=ExtResource( 4 )]
+position = Vector2( 1928.85, -430.843 )
+
+[node name="Jake2" parent="YSort/Jakes" instance=ExtResource( 4 )]
+position = Vector2( -544.901, -689.279 )
+
+[node name="Jake3" parent="YSort/Jakes" instance=ExtResource( 4 )]
+position = Vector2( 1182.19, 584.99 )
+
+[node name="Jake6" parent="YSort/Jakes" instance=ExtResource( 4 )]
+position = Vector2( 655.721, 1474.86 )
+
+[node name="Jake4" parent="YSort/Jakes" instance=ExtResource( 4 )]
+position = Vector2( 2002.59, 1427.12 )
+
+[node name="Jake5" parent="YSort/Jakes" instance=ExtResource( 4 )]
+position = Vector2( -659.875, 1530.24 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )

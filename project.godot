@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Something Something Dark Side"
-run/main_scene="res://Game.tscn"
+run/main_scene="res://IntroScene.tscn"
 config/icon="res://icon.png"
 
 [autoload]

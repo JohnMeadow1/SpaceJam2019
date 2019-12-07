@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const DISTANCE_THRESHOLD: = 3.0
+const DISTANCE_THRESHOLD: = 30.0
 const DARKSIDE_THRESHOLD: = 500.0
 export var max_speed: = 300.0
 
@@ -11,6 +11,8 @@ var _is_following: = false
 var timer = 0.0
 var timeout = 2.0
 var can_talk = true
+
+var darkness = 0.0
 
 onready var darkside = get_tree().get_nodes_in_group("darkside").front()
 
@@ -28,9 +30,9 @@ func _physics_process(delta: float) -> void:
 		timeout = -1.0
 		$eyes.hide()
 		can_talk = bool(randi()%100<1)
-		print(can_talk)
 		
-
+	if darkness>0:
+		darkness-=delta *10
 	$eyes.position = Vector2 (rand_range(-1,1),rand_range(-1,1))
 #
 #	if Input.is_action_pressed("click"):
@@ -51,15 +53,18 @@ func _physics_process(delta: float) -> void:
 		distance_to_edge = global_position - node.global_position
 		velocity += distance_to_edge.normalized() / max(1, distance_to_edge.length() - node.distance) * max_speed
 	
-	velocity += (global_position - darkside.global_position).normalized() / ((global_position - darkside.global_position).length() + 1.0)
-	if global_position.distance_to(darkside.global_position) < DARKSIDE_THRESHOLD:
-		if abs(darkside.get_node("Light2D").rotation - (global_position - darkside.global_position).angle()) < PI/4.0:
-			var new_direction = (global_position - darkside.global_position).tangent() * sign (darkside.get_node("Light2D").rotation - (global_position - darkside.global_position).angle())
-			run_away( new_direction + (global_position - darkside.global_position) )
-
-			if !$neverJoin.playing && can_talk:
+	velocity += (global_position - darkside.get_node("Light2D").global_position).normalized() / ((global_position - darkside.get_node("Light2D").global_position).length() + 1.0)
+	if global_position.distance_to(darkside.get_node("Light2D").global_position) < DARKSIDE_THRESHOLD:
+		if abs(darkside.get_node("Light2D").rotation - (global_position - darkside.get_node("Light2D").global_position).angle()) < PI/4.0:
+			var new_direction = (global_position - darkside.global_position).tangent() * sign (darkside.get_node("Light2D").rotation - (global_position - darkside.get_node("Light2D").global_position).angle())
+			run_away( new_direction + (global_position - darkside.get_node("Light2D").global_position) )
+			darkness += 1
+			$Label.text = str(darkness)
+			if !$neverJoin.playing && darkness >100 :
+				darkness = 0
 				$neverJoin.play()
 				get_dark()
+				darkside.get_push(darkside.get_node("Light2D").global_position - global_position)
 				
 		
 	$target.global_position = target_global_position
@@ -70,7 +75,7 @@ func get_dark():
 	timeout = rand_range(2.0,3.0)
 	$eyes.show()
 	can_talk = false
-
+	
 func rotate_actor():
 	var direction:int = round(((velocity.angle() + PI*1.5) / PI) * 2)
 	match direction:

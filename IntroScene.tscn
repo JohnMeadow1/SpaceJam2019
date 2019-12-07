@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://IntroText.tscn" type="PackedScene" id=1]
 [ext_resource path="res://fonts/comic.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://fonts/Starjedi.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://sounds/intro-flute.ogg" type="AudioStream" id=4]
+[ext_resource path="res://background/space.png" type="Texture" id=5]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Spatial
@@ -91,12 +92,13 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="ProceduralSky" id=10]
-sky_top_color = Color( 0, 0, 0, 1 )
+[sub_resource type="PanoramaSky" id=10]
+panorama = ExtResource( 5 )
 
 [sub_resource type="Environment" id=11]
-background_mode = 1
+background_mode = 2
 background_sky = SubResource( 10 )
+background_sky_orientation = Basis( 0, 0, 1, 1, 0, 0, 0, 1, 0 )
 
 [node name="Spatial" type="Spatial"]
 script = SubResource( 1 )

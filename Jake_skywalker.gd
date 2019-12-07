@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 			
 			
 	if global_position.distance_to(darkside.global_position) < DARKSIDE_THRESHOLD:
-		run_away( global_position + (global_position - darkside.global_position) )
+		run_away( (global_position - darkside.global_position) )
 		if !$neverJoin.playing:
 			$neverJoin.play()
 		

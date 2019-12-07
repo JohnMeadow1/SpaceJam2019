@@ -18,7 +18,7 @@ var darkning: Node2D
 var target: Node2D
 
 func _process(delta: float) -> void:
-	rotation = (get_global_mouse_position() - global_position).angle()
+	$Light2D.rotation = (get_global_mouse_position() - $Light2D.global_position).angle()
 	
 	var move: Vector2
 	move.x = int(Input.is_action_pressed(\"right\")) - int(Input.is_action_pressed(\"left\"))
@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 	move_and_slide(move.normalized() * 200)
 	
 	if darkning:
-		darkning.from = position
+		darkning.from = $DarkningSource.global_position
 		target.darken(delta)
 
 func _input(event: InputEvent) -> void:
@@ -45,8 +45,8 @@ func _input(event: InputEvent) -> void:
 			if lantern:
 				target = lantern
 				darkning = preload(\"res://Darkning.tscn\").instance()
-				darkning.from = position
-				darkning.to = lantern.position
+				darkning.from = $DarkningSource.global_position
+				darkning.to = lantern.global_position
 				get_parent().add_child(darkning)
 				audio.play()
 				if randi() % 3 == 0:
@@ -78,8 +78,9 @@ position = Vector2( 0, -80 )
 texture = ExtResource( 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 256, 0 )
+position = Vector2( 2.97586, -151.564 )
 texture = ExtResource( 2 )
+offset = Vector2( 253.024, -3.43571 )
 mode = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -99,3 +100,6 @@ attenuation = 0.217638
 [node name="Sprite2" type="Sprite" parent="."]
 position = Vector2( 4.84137, -126.653 )
 texture = ExtResource( 4 )
+
+[node name="DarkningSource" type="Position2D" parent="."]
+position = Vector2( 20.0139, -107.795 )

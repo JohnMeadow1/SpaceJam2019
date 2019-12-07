@@ -27,6 +27,9 @@ func darken(delta: float) -> void:
 		timer.start()
 		$AudioStreamPlayer2D.play()
 		$AudioStreamPlayer2D2.play()
+		$AnimatedSprite.show()
+		$AnimatedSprite.frame = 0
+		$AnimatedSprite.play("default")
 
 func reset():
 	if darkness_is_on:
@@ -41,3 +44,7 @@ func dedark() -> void:
 	sprite.modulate = Color.white
 	charge_timer = 0
 	$AudioStreamPlayer2D2.stop()
+
+
+func _on_AnimatedSprite_animation_finished() -> void:
+	$AnimatedSprite.hide()

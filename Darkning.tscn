@@ -1,5 +1,25 @@
 [gd_scene load_steps=4 format=2]
 
+[sub_resource type="GDScript" id=3]
+script/source = "extends Node2D
+
+var from: Vector2 setget set_from
+var to: Vector2
+
+func _ready() -> void:
+	upd()
+
+func set_from(f):
+	from = f
+	upd()
+
+func upd():
+	$Rect.rect_size.y = 256
+	global_position = from
+	rotation = (to - from).angle()
+	$Rect.rect_size.x = (to - from).length()
+"
+
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
@@ -56,33 +76,17 @@ void fragment(){
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
 
-[sub_resource type="GDScript" id=3]
-script/source = "extends ColorRect
+[node name="Darkning" type="Node2D"]
+z_index = 10
+script = SubResource( 3 )
 
-var from: Vector2 setget set_from
-var to: Vector2
-
-func _ready() -> void:
-	upd()
-
-func set_from(f):
-	from = f
-	upd()
-
-func upd():
-	rect_size.y = 256
-	rect_position = from - Vector2(0, rect_size.y / 2)
-	rect_rotation = rad2deg((to - from).angle())
-	rect_size.x = (to - from).length()
-"
-
-[node name="Lightning" type="ColorRect"]
+[node name="Rect" type="ColorRect" parent="."]
 material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -344.0
-rect_pivot_offset = Vector2( 0, 128 )
-script = SubResource( 3 )
+margin_top = -128.0
+margin_right = 800.0
+margin_bottom = 128.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

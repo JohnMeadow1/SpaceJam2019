@@ -66,10 +66,8 @@ func get_push(direction) -> void:
 		
 		$AudioStreamPlayer2D4.stream = [
 			preload("res://sounds/goodHateFlow.wav"),
-			preload("res://sounds/good.wav"),
-			preload("res://sounds/darkMonologue.wav"),
-			preload("res://sounds/emperorSith.wav")
-		][randi() % 4]
+			preload("res://sounds/good.wav")
+		][randi() % 2]
 		$AudioStreamPlayer2D4.play()
 	
 func _input(event: InputEvent) -> void:
@@ -117,3 +115,6 @@ func play3():
 			preload("res://sounds/somethingDarkSide.wav")
 		][randi() % 2]
 		$AudioStreamPlayer2D3.play()
+
+func the_sith():
+	$AudioStreamPlayer2D5.play()

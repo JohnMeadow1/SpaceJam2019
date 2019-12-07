@@ -6,6 +6,8 @@ export var max_speed: = 300.0
 
 const MAX_DARKNESS = 100.0
 
+var frozen
+
 var target_global_position: = Vector2.ZERO setget set_target_global_position
 var velocity: = Vector2.ZERO
 
@@ -15,6 +17,8 @@ var timeout = 2.0
 var can_talk = true
 
 var darkness = 0.0
+
+var lifes = 3
 
 onready var darkside = get_tree().get_nodes_in_group("darkside").front()
 
@@ -26,6 +30,8 @@ func _ready() -> void:
 	$Force_push/Tween.connect("tween_all_completed", $Force_push, "hide")
 
 func _physics_process(delta: float) -> void:
+	if frozen: return
+	
 	if timer < timeout:
 		timer += delta
 	else:
@@ -34,7 +40,7 @@ func _physics_process(delta: float) -> void:
 		$eyes.hide()
 		can_talk = bool(randi()%100<1)
 		
-	if darkness>0:
+	if darkness>0 and lifes > 0:
 		darkness = max (0, darkness - delta *10)
 	$eyes.position = Vector2 (rand_range(-1,1),rand_range(-1,1))
 #
@@ -53,9 +59,12 @@ func _physics_process(delta: float) -> void:
 			velocity += distance_to_edge.normalized() /  max(1, distance_to_edge.length() - node.size_in_pixels * 0.5 ) * max_speed * 0.1
 				
 	for node in get_tree().get_nodes_in_group("avoid"):
+		if lifes == 0 and node.is_in_group("hax"):
+			continue
+		
 		distance_to_edge = global_position - node.global_position
 		velocity += distance_to_edge.normalized() / max(1, distance_to_edge.length() - node.distance) * max_speed
-	if darkside.is_flashlight_on:
+	if darkside.is_flashlight_on and lifes > 0:
 	#	velocity += (global_position - darkside.get_node("Light2D").global_position).normalized() / ((global_position - darkside.get_node("Light2D").global_position).length() + 1.0)
 		if global_position.distance_to(darkside.get_node("Light2D").global_position) < DARKSIDE_THRESHOLD:
 			if abs(darkside.get_node("Light2D").rotation - (global_position - darkside.get_node("Light2D").global_position).angle()) < PI/4.0:
@@ -63,6 +72,13 @@ func _physics_process(delta: float) -> void:
 				run_away( new_direction + (global_position - darkside.get_node("Light2D").global_position) )
 				darkness += 1
 				if !$neverJoin.playing && darkness >MAX_DARKNESS :
+					lifes -= 1
+					if lifes == 0:
+						get_tree().get_root().get_node("Game").darkside_count += 1
+						darkside.get_node("AudioStreamPlayer2D6").play()
+						set_target_global_position(get_tree().get_nodes_in_group("hax").front().global_position)
+						return
+					
 					$ForceSFX.play()
 					darkness = 0
 					$neverJoin.play()
@@ -75,6 +91,7 @@ func _physics_process(delta: float) -> void:
 					$Force_push.rotation = dir.angle()
 					$Force_push/Tween.interpolate_property($Force_push, "global_position", global_position, global_position + dir * 700, 1, Tween.TRANS_CUBIC, Tween.EASE_OUT)
 					$Force_push/Tween.start()
+					
 				
 		
 	$target.global_position = target_global_position

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://images/Emperor-still.png" type="Texture" id=1]
 [ext_resource path="res://Flashlight2.png" type="Texture" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://avoid.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Vader.gd" type="Script" id=15]
 [ext_resource path="res://images/force_push.png" type="Texture" id=16]
+[ext_resource path="res://sounds/emperorSith.wav" type="AudioStream" id=17]
+[ext_resource path="res://sounds/darkMonologue.wav" type="AudioStream" id=18]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -114,6 +116,12 @@ data = PoolByteArray( 255, 255, 1, 0, 245, 255, 9, 0, 218, 255, 15, 0, 193, 255,
 format = 1
 stereo = true
 
+[sub_resource type="AudioStreamRandomPitch" id=14]
+audio_stream = ExtResource( 17 )
+
+[sub_resource type="AudioStreamRandomPitch" id=15]
+audio_stream = ExtResource( 18 )
+
 [node name="Vader" type="KinematicBody2D" groups=[
 "darkside",
 ]]
@@ -124,7 +132,7 @@ material = SubResource( 2 )
 position = Vector2( 0, -70 )
 frames = SubResource( 10 )
 animation = "1"
-frame = 2
+frame = 6
 playing = true
 
 [node name="shadow" type="Sprite" parent="."]
@@ -159,6 +167,14 @@ attenuation = 0.217638
 attenuation = 0.217638
 
 [node name="AudioStreamPlayer2D4" type="AudioStreamPlayer2D" parent="."]
+attenuation = 0.217638
+
+[node name="AudioStreamPlayer2D5" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource( 14 )
+attenuation = 0.217638
+
+[node name="AudioStreamPlayer2D6" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource( 15 )
 attenuation = 0.217638
 
 [node name="Sprite2" type="Sprite" parent="."]

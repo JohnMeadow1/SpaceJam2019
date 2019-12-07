@@ -9,6 +9,7 @@ const DEFAULT_SLOW_RADIUS: = 50.0
 const DEFAULT_MAX_SPEED: = 400.0
 
 func _init() -> void:
+	OS.window_maximized = true
 	randomize()
 
 static func follow(

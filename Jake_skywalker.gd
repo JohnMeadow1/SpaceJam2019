@@ -37,8 +37,11 @@ func _physics_process(delta: float) -> void:
 			if (node.global_position - (global_position+velocity)).length() <= node.size_in_pixels:
 				run_away(global_position - node.global_position)
 			
+			
 	if global_position.distance_to(darkside.global_position) < DARKSIDE_THRESHOLD:
 		run_away( global_position + (global_position - darkside.global_position) )
+		if !$neverJoin.playing:
+			$neverJoin.play()
 		
 	$target.global_position = target_global_position
 	velocity = move_and_slide(velocity)

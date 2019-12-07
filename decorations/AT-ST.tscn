@@ -25,9 +25,11 @@ __meta__ = {
 }
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 position = Vector2( 26.5368, 37.0119 )
-polygon = PoolVector2Array( -241.615, -93.2494, -101.5, -130.202, 0.58371, -65.4558, 14.4862, -68.6335, 64.138, -36.4591, -12.5979, 20.024, -37.1776, 95.0237, -92.6396, 84.3094, -122.261, 40.8222, -243.269, -32.2867 )
+polygon = PoolVector2Array( -234.234, -96.7609, -78.4333, -111.961, -12.1553, -104.955, 64.4836, -56.4567, 44.7251, 26.1696, -30.7163, 75.8652, -79.8131, 80.0564, -131.305, 50.718, -243.269, -32.2867 )
 
 [node name="avoid" parent="." instance=ExtResource( 2 )]
+visible = false
 position = Vector2( -62.2579, -15.7245 )
 distance = 200.0

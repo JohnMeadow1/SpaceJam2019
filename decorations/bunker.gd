@@ -13,3 +13,6 @@ func kill_him():
 	to_kill.queue_free()
 	to_kill = null
 	get_tree().get_nodes_in_group("darkside").front().the_sith()
+func move_jake():
+	to_kill.frozen = false
+

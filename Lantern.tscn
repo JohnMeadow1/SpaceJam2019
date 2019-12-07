@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Lantern.gd" type="Script" id=1]
 [ext_resource path="res://background/crystal.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://background/crystal_anim0.png" type="Texture" id=11]
 [ext_resource path="res://DarkObject.material" type="Material" id=12]
 [ext_resource path="res://background/crystal_light.png" type="Texture" id=13]
+[ext_resource path="res://avoid.tscn" type="PackedScene" id=14]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Default"
@@ -84,11 +85,16 @@ attenuation = 2.0
 visible = false
 position = Vector2( 1, -30 )
 frames = SubResource( 2 )
-frame = 4
+frame = 2
 speed_scale = 2.0
 playing = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PoolVector2Array( -21, 10, -40, -10, -1, -17, 38, -13, 32, 0, 17, 10 )
+
+[node name="avoid" parent="." instance=ExtResource( 14 )]
+visible = false
+distance = 70.0
 [connection signal="timeout" from="Timer" to="." method="dedark"]
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

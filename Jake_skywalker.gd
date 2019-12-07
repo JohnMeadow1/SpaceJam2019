@@ -52,17 +52,20 @@ func _physics_process(delta: float) -> void:
 	velocity = Steering.arrive_to( velocity, global_position, target_global_position, max_speed )
 		
 	var distance_to_edge := Vector2.ZERO
-	for node in get_tree().get_nodes_in_group("light"):
-		if node.darkness_is_on:
-			distance_to_edge = global_position - node.global_position
-			velocity += distance_to_edge.normalized() /  max(1, distance_to_edge.length() - node.size_in_pixels * 0.5 ) * max_speed * 0.1
-				
+#	for node in get_tree().get_nodes_in_group("light"):
+#		if node.darkness_is_on:
+#			distance_to_edge = global_position - node.global_position
+#			velocity += distance_to_edge.normalized() /  max(1, distance_to_edge.length() - node.size_in_pixels * 0.5 ) * max_speed * 0.1
+#
 	for node in get_tree().get_nodes_in_group("avoid"):
 		if lifes == 0 and node.is_in_group("hax"):
 			continue
 		
 		distance_to_edge = global_position - node.global_position
+		if distance_to_edge.length() - node.distance < 0:
+			set_new_target()
 		velocity += distance_to_edge.normalized() / max(1, distance_to_edge.length() - node.distance) * max_speed
+		
 	if darkside.is_flashlight_on and lifes > 0:
 	#	velocity += (global_position - darkside.get_node("Light2D").global_position).normalized() / ((global_position - darkside.get_node("Light2D").global_position).length() + 1.0)
 		if global_position.distance_to(darkside.get_node("Light2D").global_position) < DARKSIDE_THRESHOLD:
@@ -126,7 +129,7 @@ func set_new_target():
 	var valid_target = false
 	for i in 1000: 
 		valid_target = true
-		target = Vector2( rand_range(0, 2000), rand_range(0, 1000) )
+		target = Vector2( rand_range(0, 2400), rand_range(0, 2000) )
 		for node in get_tree().get_nodes_in_group("light"):
 			if node.darkness_is_on:
 				if (node.global_position - target).length() <= node.size_in_pixels:

@@ -5,7 +5,7 @@
 [ext_resource path="res://decorations/bunker.gd" type="Script" id=3]
 [ext_resource path="res://background/bunker_door_anim.png" type="Texture" id=4]
 
-[sub_resource type="CanvasItemMaterial" id=1]
+[sub_resource type="CanvasItemMaterial" id=3]
 light_mode = 2
 
 [sub_resource type="Animation" id=2]
@@ -43,15 +43,18 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 1.5 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.9, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "move_jake"
+}, {
 "args": [  ],
 "method": "kill_him"
 } ]
 }
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 204.374, 59.9335 )
 
 [node name="bunker" type="StaticBody2D"]
@@ -64,7 +67,7 @@ texture = ExtResource( 4 )
 vframes = 4
 
 [node name="dark" type="Sprite" parent="."]
-material = SubResource( 1 )
+material = SubResource( 3 )
 position = Vector2( 0, -159 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 1 )
@@ -73,21 +76,26 @@ vframes = 4
 [node name="avoid" parent="." groups=[
 "hax",
 ] instance=ExtResource( 2 )]
+visible = false
 position = Vector2( 0.902527, -61.3701 )
 distance = 300.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PoolVector2Array( -506, -121, -485, 54, -230, 52, -218, 0, -212, -130 )
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PoolVector2Array( 238, 54, 212, -1, 199, -128, 517, -96, 488, 47 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/door_open = SubResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, 29.9169 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 3 )
+position = Vector2( 2, -73.9169 )
+shape = SubResource( 4 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

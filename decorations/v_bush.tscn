@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://background/v_bush2.png" type="Texture" id=2]
+[ext_resource path="res://background/v_bush1.png" type="Texture" id=3]
+[ext_resource path="res://DarkObject.material" type="Material" id=4]
+[ext_resource path="res://background/v_bush.png" type="Texture" id=5]
+[ext_resource path="res://background/v_bush0.png" type="Texture" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 75, 312 )
+
+[node name="v_bush" type="StaticBody2D"]
+
+[node name="light" type="Sprite" parent="."]
+position = Vector2( 0, 110 )
+texture = ExtResource( 5 )
+
+[node name="light2" type="Sprite" parent="."]
+position = Vector2( 0, 510 )
+texture = ExtResource( 3 )
+
+[node name="dark" type="Sprite" parent="."]
+material = ExtResource( 4 )
+position = Vector2( 0, 110 )
+texture = ExtResource( 6 )
+
+[node name="dark2" type="Sprite" parent="."]
+material = ExtResource( 4 )
+position = Vector2( 0, 510 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, 310 )
+shape = SubResource( 1 )

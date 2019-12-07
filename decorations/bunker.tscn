@@ -10,13 +10,13 @@ light_mode = 2
 [node name="bunker" type="StaticBody2D"]
 
 [node name="light" type="Sprite" parent="."]
-position = Vector2( 15.3634, -57.7225 )
+position = Vector2( 0, -159 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 1 )
 
 [node name="dark" type="Sprite" parent="."]
 material = SubResource( 1 )
-position = Vector2( 15.3634, -56.2905 )
+position = Vector2( 0, -159 )
 texture = ExtResource( 3 )
 
 [node name="avoid" parent="." instance=ExtResource( 2 )]
@@ -25,5 +25,7 @@ position = Vector2( 0.902527, -61.3701 )
 distance = 300.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-visible = false
-polygon = PoolVector2Array( -305.752, 92.6107, -327.412, -28.3246, 357.586, -32.8371, 679.151, 207.771 )
+polygon = PoolVector2Array( -506, -121, -485, 54, -230, 52, -218, 0, -212, -130 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 238, 54, 212, -1, 199, -128, 517, -96, 488, 47 )

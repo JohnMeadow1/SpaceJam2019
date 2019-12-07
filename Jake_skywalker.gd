@@ -10,11 +10,14 @@ var velocity: = Vector2.ZERO
 var _is_following: = false
 var timer = 0.0
 var timeout = 2.0
+var can_talk = true
 
 onready var darkside = get_tree().get_nodes_in_group("darkside").front()
 
 func _ready() -> void:
 	randomize()
+	can_talk = bool(randi()%2)
+	timeout = rand_range(1.0,5.0)
 	set_new_target()
 
 func _physics_process(delta: float) -> void:
@@ -24,11 +27,14 @@ func _physics_process(delta: float) -> void:
 		timer = 0.0
 		timeout = -1.0
 		$eyes.hide()
+		can_talk = bool(randi()%100<1)
+		print(can_talk)
+		
 
 	$eyes.position = Vector2 (rand_range(-1,1),rand_range(-1,1))
-	
-	if Input.is_action_pressed("click"):
-		self.target_global_position = get_global_mouse_position()
+#
+#	if Input.is_action_pressed("click"):
+#		self.target_global_position = get_global_mouse_position()
 		
 	
 	if global_position.distance_to(target_global_position) < DISTANCE_THRESHOLD:
@@ -39,8 +45,7 @@ func _physics_process(delta: float) -> void:
 	for node in get_tree().get_nodes_in_group("light"):
 		if node.darkness_is_on:
 			distance_to_edge = global_position - node.global_position
-			if distance_to_edge.length() - node.size_in_pixels  <= 0:
-				velocity += distance_to_edge.normalized() /  max(1, distance_to_edge.length() - node.size_in_pixels) * max_speed
+			velocity += distance_to_edge.normalized() /  max(1, distance_to_edge.length() - node.size_in_pixels * 0.5 ) * max_speed * 0.1
 				
 	for node in get_tree().get_nodes_in_group("avoid"):
 		distance_to_edge = global_position - node.global_position
@@ -51,9 +56,10 @@ func _physics_process(delta: float) -> void:
 		if abs(darkside.get_node("Light2D").rotation - (global_position - darkside.global_position).angle()) < PI/4.0:
 			var new_direction = (global_position - darkside.global_position).tangent() * sign (darkside.get_node("Light2D").rotation - (global_position - darkside.global_position).angle())
 			run_away( new_direction + (global_position - darkside.global_position) )
-			get_dark()
-			if !$neverJoin.playing:
+
+			if !$neverJoin.playing && can_talk:
 				$neverJoin.play()
+				get_dark()
 				
 		
 	$target.global_position = target_global_position
@@ -61,8 +67,9 @@ func _physics_process(delta: float) -> void:
 	rotate_actor()
 	
 func get_dark():
-	timeout = 2.0
+	timeout = rand_range(2.0,3.0)
 	$eyes.show()
+	can_talk = false
 
 func rotate_actor():
 	var direction:int = round(((velocity.angle() + PI*1.5) / PI) * 2)

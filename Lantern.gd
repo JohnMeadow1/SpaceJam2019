@@ -2,7 +2,7 @@ extends Node2D
 
 const CHARGE_MAX := 1.0
 
-onready var sprite: Sprite = $Sprite
+#onready var sprite: Sprite = $Sprite
 onready var dark: Node2D = $LightScale
 onready var timer: Timer = $Timer
 
@@ -29,6 +29,7 @@ func darken(delta: float) -> void:
 		dark.show()
 		darkness_is_on = true
 		timer.start()
+		timer.wait_time = rand_range(5,10)
 		$AudioStreamPlayer2D.play()
 		$AudioStreamPlayer2D2.play()
 

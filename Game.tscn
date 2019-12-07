@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Lantern.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Vader.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://fonts/Starjedi.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://Game.gd" type="Script" id=12]
 [ext_resource path="res://decorations/Tree.tscn" type="PackedScene" id=13]
+[ext_resource path="res://decorations/fallen_tree.tscn" type="PackedScene" id=14]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends TileMap
@@ -57,30 +58,6 @@ limit_top = -1050
 limit_right = 2200
 limit_bottom = 1600
 editor_draw_limits = true
-
-[node name="Lantern4" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( -57.0838, -504.378 )
-
-[node name="Lantern5" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( -715.548, 646.244 )
-
-[node name="Lantern6" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 1800.87, 1365.92 )
-
-[node name="Lantern7" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 290.38, 1361.02 )
-
-[node name="Lantern8" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 1771.45, -473.155 )
-
-[node name="Lantern9" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( -911.15, -767.407 )
-
-[node name="Lantern10" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 1374.21, 488.068 )
-
-[node name="Lantern11" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 794.397, 275.618 )
 
 [node name="Jake" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 1290.57, 766.517 )
@@ -132,6 +109,38 @@ position = Vector2( 147.635, -562.912 )
 
 [node name="Tree5" parent="YSort" instance=ExtResource( 13 )]
 position = Vector2( -857.3, 235.99 )
+
+[node name="fallen_tree" parent="YSort" instance=ExtResource( 14 )]
+position = Vector2( 1637.75, -824.456 )
+
+[node name="fallen_tree2" parent="YSort" instance=ExtResource( 14 )]
+position = Vector2( -635.204, 972.838 )
+
+[node name="Lanturns" type="YSort" parent="YSort"]
+
+[node name="Lantern4" parent="YSort/Lanturns" instance=ExtResource( 1 )]
+position = Vector2( 1.13739, -168.749 )
+
+[node name="Lantern5" parent="YSort/Lanturns" instance=ExtResource( 1 )]
+position = Vector2( 1548.23, -305.846 )
+
+[node name="Lantern6" parent="YSort/Lanturns" instance=ExtResource( 1 )]
+position = Vector2( 2033.76, 170.67 )
+
+[node name="Lantern7" parent="YSort/Lanturns" instance=ExtResource( 1 )]
+position = Vector2( 1632.53, 937.603 )
+
+[node name="Lantern8" parent="YSort/Lanturns" instance=ExtResource( 1 )]
+position = Vector2( 465.248, 1116.66 )
+
+[node name="Lantern9" parent="YSort/Lanturns" instance=ExtResource( 1 )]
+position = Vector2( -775.337, 538.795 )
+
+[node name="Lantern10" parent="YSort/Lanturns" instance=ExtResource( 1 )]
+position = Vector2( 866.908, -882.046 )
+
+[node name="Lantern11" parent="YSort/Lanturns" instance=ExtResource( 1 )]
+position = Vector2( -200.234, 1505.92 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )

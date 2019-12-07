@@ -17,7 +17,6 @@ _global_script_class_icons={
 
 config/name="Something Something Dark Side"
 run/main_scene="res://Sandbox.tscn"
-config/icon="res://icon.png"
 
 [autoload]
 

@@ -23,6 +23,7 @@ func _ready() -> void:
 	can_talk = bool(randi()%2)
 	timeout = rand_range(1.0,5.0)
 	set_new_target()
+	$Force_push/Tween.connect("tween_all_completed", $Force_push, "hide")
 
 func _physics_process(delta: float) -> void:
 	if timer < timeout:
@@ -67,6 +68,13 @@ func _physics_process(delta: float) -> void:
 					$neverJoin.play()
 					get_dark()
 					darkside.get_push(darkside.get_node("Light2D").global_position - global_position)
+					
+					var dir: Vector2 = (darkside.global_position - global_position).normalized()
+					$Force_push.show()
+					$Force_push.frame = 0
+					$Force_push.rotation = dir.angle()
+					$Force_push/Tween.interpolate_property($Force_push, "global_position", global_position, global_position + dir * 700, 1, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+					$Force_push/Tween.start()
 				
 		
 	$target.global_position = target_global_position

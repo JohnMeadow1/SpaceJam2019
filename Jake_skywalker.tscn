@@ -37,14 +37,14 @@ shader_param/power = 0.0
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 9 ), ExtResource( 4 ) ],
-"loop": true,
-"name": "left",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 5 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "left",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 10 ), ExtResource( 6 ) ],
@@ -158,5 +158,7 @@ material = SubResource( 2 )
 position = Vector2( 0, -80 )
 frames = SubResource( 13 )
 animation = "push"
-frame = 6
+frame = 3
 playing = true
+
+[node name="Tween" type="Tween" parent="Force_push"]

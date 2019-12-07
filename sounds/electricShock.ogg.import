@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/electricShock.ogg-1c34fdf0ecf643aaaeb726b53fa81eec.oggstr"
+
+[deps]
+
+source_file="res://sounds/electricShock.ogg"
+dest_files=[ "res://.import/electricShock.ogg-1c34fdf0ecf643aaaeb726b53fa81eec.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0.3

@@ -45,7 +45,12 @@ func _physics_process(delta: float) -> void:
 	rotate_actor()
 	
 func rotate_actor():
-	pass 
+	var direction:int = round(((velocity.angle() + PI*1.5) / PI) * 2)
+	match direction:
+		1:$AnimatedSprite.play("left")
+		2:$AnimatedSprite.play("up")
+		3:$AnimatedSprite.play("right")
+		4:$AnimatedSprite.play("down")
 	
 func set_new_target():
 	var target = Vector2.ZERO

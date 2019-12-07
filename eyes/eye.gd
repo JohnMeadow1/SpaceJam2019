@@ -9,6 +9,8 @@ export(Vector2) var gravity := Vector2(0,100) setget set_gravity
 
 func _ready():
 	update_threshold()
+	if Engine.editor_hint:
+		set_physics_process(false)
 	
 func set_eye_size(value):
 	eye_size = max( value, 2 )

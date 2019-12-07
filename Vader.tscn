@@ -31,6 +31,16 @@ func _process(delta: float) -> void:
 	var move: Vector2
 	move.x = int(Input.is_action_pressed(\"right\")) - int(Input.is_action_pressed(\"left\"))
 	move.y = int(Input.is_action_pressed(\"down\")) - int(Input.is_action_pressed(\"up\"))
+	if move.length() > 0:
+		var direction = int(round(((move.angle() + PI) / PI) * 2))
+		match direction:
+			1:$AnimatedSprite.play(\"up\")
+			2:$AnimatedSprite.play(\"right\")
+			3:$AnimatedSprite.play(\"down\")
+			4:$AnimatedSprite.play(\"left\")
+	else:
+		$AnimatedSprite.play(\"idle\")
+	
 	
 	move_and_slide(move.normalized() * 200)
 	
@@ -112,7 +122,8 @@ script = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -70 )
 frames = SubResource( 2 )
-animation = "idle"
+animation = "left"
+frame = 1
 playing = true
 
 [node name="Sprite" type="Sprite" parent="."]

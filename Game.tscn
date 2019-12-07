@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Lantern.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Vader.tscn" type="PackedScene" id=2]
+[ext_resource path="res://avoid.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Jake_skywalker.tscn" type="PackedScene" id=4]
+[ext_resource path="res://TestDark.png" type="Texture" id=5]
+[ext_resource path="res://TestLight.png" type="Texture" id=6]
+[ext_resource path="res://background/image0dark_.png" type="Texture" id=7]
+[ext_resource path="res://background/image0.png" type="Texture" id=8]
+[ext_resource path="res://sounds/background-music.ogg" type="AudioStream" id=9]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+light_mode = 2
+
+[node name="Game" type="Node2D"]
+position = Vector2( -43.3317, -9.28537 )
+
+[node name="L" type="Sprite" parent="."]
+position = Vector2( 501.33, 303.726 )
+texture = ExtResource( 6 )
+
+[node name="D" type="Sprite" parent="."]
+material = SubResource( 1 )
+position = Vector2( 501.33, 305.396 )
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Vader" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 230.011, 448.332 )
+
+[node name="AT-ST" type="StaticBody2D" parent="YSort"]
+
+[node name="light" type="Sprite" parent="YSort/AT-ST"]
+position = Vector2( 15.3634, 25.1401 )
+texture = ExtResource( 8 )
+
+[node name="dark" type="Sprite" parent="YSort/AT-ST"]
+material = SubResource( 1 )
+position = Vector2( 15.3634, 25.1401 )
+texture = ExtResource( 7 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="YSort/AT-ST"]
+visible = false
+position = Vector2( 26.5368, 37.0119 )
+polygon = PoolVector2Array( -241.615, -93.2494, -101.5, -130.202, 0.58371, -65.4558, 14.4862, -68.6335, 64.138, -36.4591, -12.5979, 20.024, -37.1776, 95.0237, -92.6396, 84.3094, -122.261, 40.8222, -243.269, -32.2867 )
+
+[node name="avoid" parent="YSort/AT-ST" instance=ExtResource( 3 )]
+visible = false
+position = Vector2( -62.2579, -15.7245 )
+avoid_distance = 160.0
+
+[node name="Lantern4" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 821.707, 912.62 )
+
+[node name="Lantern5" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 642.583, 814.434 )
+
+[node name="Lantern6" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 732.87, 613.272 )
+
+[node name="Jake" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 111.415, 586.137 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -10.0
+autoplay = true

@@ -9,6 +9,9 @@ onready var audio2: AudioStreamPlayer2D = $AudioStreamPlayer2D2
 var darkning: Node2D
 var target: Node2D
 
+const MAX_STAMINA = 2.0
+var stamina := MAX_STAMINA
+
 func _process(delta: float) -> void:
 	$Light2D.rotation = (get_global_mouse_position() - $Light2D.global_position).angle()
 	
@@ -31,6 +34,15 @@ func _process(delta: float) -> void:
 	if darkning:
 		darkning.from = $DarkningSource.global_position
 		target.darken(delta)
+	
+	if Input.is_action_pressed("click") or Input.is_action_pressed("unlimited_power"):
+		stamina = max(stamina - delta, 0)
+	else:
+		stamina = min(stamina + delta, 2)
+	$AnimatedSprite.material.set_shader_param("power", stamina / MAX_STAMINA);
+	
+	if stamina == 0 and darkning:
+		remove_dark()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -55,14 +67,17 @@ func _input(event: InputEvent) -> void:
 					audio2.play()
 		
 		if not event.pressed and event.is_action("unlimited_power") and darkning:
-			darkning.queue_free()
-			target.reset()
-			darkning = null
-			target = null
-			audio.stop()
+			remove_dark()
 		
 		if event.pressed and event.is_action("click"):
 			play3()
+
+func remove_dark():
+	darkning.queue_free()
+	target.reset()
+	darkning = null
+	target = null
+	audio.stop()
 
 func play3():
 	if !$AudioStreamPlayer2D3.playing:

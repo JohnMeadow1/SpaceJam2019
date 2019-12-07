@@ -28,7 +28,6 @@ func _physics_process(delta: float) -> void:
 		timeout = -1.0
 		$eyes.hide()
 		can_talk = bool(randi()%100<1)
-		print(can_talk)
 		
 
 	$eyes.position = Vector2 (rand_range(-1,1),rand_range(-1,1))

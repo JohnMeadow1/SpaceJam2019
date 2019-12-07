@@ -83,14 +83,15 @@ func _input(event: InputEvent) -> void:
 			play3()
 
 func play3():
-	if randi() % 3 != 0:
-		return
-	
-	$AudioStreamPlayer2D3.stream = [
-		preload(\"res://sounds/somethingComplete.wav\"),
-		preload(\"res://sounds/somethingDarkSide.wav\")
-	][randi() % 2]
-	$AudioStreamPlayer2D3.play()
+	if !$AudioStreamPlayer2D3.playing:
+		if randi() % 3 != 0:
+			return
+		
+		$AudioStreamPlayer2D3.stream = [
+			preload(\"res://sounds/somethingComplete.wav\"),
+			preload(\"res://sounds/somethingDarkSide.wav\")
+		][randi() % 2]
+		$AudioStreamPlayer2D3.play()
 "
 
 [sub_resource type="SpriteFrames" id=2]
@@ -142,6 +143,7 @@ texture = ExtResource( 13 )
 position = Vector2( 0, -70 )
 frames = SubResource( 2 )
 animation = "left"
+frame = 1
 playing = true
 
 [node name="Sprite" type="Sprite" parent="."]

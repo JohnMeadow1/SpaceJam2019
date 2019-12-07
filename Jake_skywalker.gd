@@ -17,7 +17,6 @@ var timeout = 2.0
 var can_talk = true
 
 var darkness = 0.0
-
 var lifes = 3
 
 onready var darkside = get_tree().get_nodes_in_group("darkside").front()
@@ -74,6 +73,8 @@ func _physics_process(delta: float) -> void:
 				if !$neverJoin.playing && darkness >MAX_DARKNESS :
 					lifes -= 1
 					if lifes == 0:
+						$AnimatedSprite.play("darkening")
+						frozen = true
 						get_tree().get_root().get_node("Game").darkside_count += 1
 						darkside.get_node("AudioStreamPlayer2D6").play()
 						set_target_global_position(get_tree().get_nodes_in_group("hax").front().global_position)
@@ -106,16 +107,19 @@ func get_dark():
 	can_talk = false
 	
 func rotate_actor():
-	if abs(velocity.x) > abs(velocity.y):
-		if velocity.x < 0:
-			$AnimatedSprite.play("left")
-		else:
-			$AnimatedSprite.play("right")
+	if lifes == 0:
+		$AnimatedSprite.play("run_away")
 	else:
-		if velocity.y < 0:
-			$AnimatedSprite.play("up")
+		if abs(velocity.x) > abs(velocity.y):
+			if velocity.x < 0:
+				$AnimatedSprite.play("left")
+			else:
+				$AnimatedSprite.play("right")
 		else:
-			$AnimatedSprite.play("down")
+			if velocity.y < 0:
+				$AnimatedSprite.play("up")
+			else:
+				$AnimatedSprite.play("down")
 	
 func set_new_target():
 	var target = Vector2.ZERO
@@ -141,3 +145,9 @@ func run_away(value: Vector2) -> void:
 func set_target_global_position(value: Vector2) -> void:
 	target_global_position = value
 	
+
+
+func _on_AnimatedSprite_animation_finished():
+	if $AnimatedSprite.animation == "darkening":
+		frozen = false
+

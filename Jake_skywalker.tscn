@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Jake_skywalker.gd" type="Script" id=1]
 [ext_resource path="res://sounds/illNeverJoinTheDarkSide.wav" type="AudioStream" id=2]
@@ -15,8 +15,13 @@
 [ext_resource path="res://background/Luke-www.png" type="Texture" id=13]
 [ext_resource path="res://sounds/forcepush.wav" type="AudioStream" id=14]
 [ext_resource path="res://images/force_push.png" type="Texture" id=15]
+[ext_resource path="res://images/Luke-evil2.png" type="Texture" id=16]
+[ext_resource path="res://images/Luke-evil1.png" type="Texture" id=17]
+[ext_resource path="res://images/Luke-evil3.png" type="Texture" id=18]
+[ext_resource path="res://images/Luke-evilwalk2.png" type="Texture" id=19]
+[ext_resource path="res://images/Luke-evilwalk1.png" type="Texture" id=20]
 
-[sub_resource type="Shader" id=13]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform float power : hint_range(0, 1);
@@ -30,21 +35,21 @@ void fragment() {
 	COLOR = mix(vec4(gray, gray, gray, color.a), color, result);
 }"
 
-[sub_resource type="ShaderMaterial" id=14]
+[sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
-shader = SubResource( 13 )
+shader = SubResource( 1 )
 shader_param/power = 0.0
 
-[sub_resource type="SpriteFrames" id=15]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 5 ), ExtResource( 7 ) ],
-"loop": true,
-"name": "right",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 9 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "right",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 10 ), ExtResource( 6 ) ],
@@ -52,16 +57,26 @@ animations = [ {
 "name": "up",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 18 ), ExtResource( 20 ), ExtResource( 18 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "run_away",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 11 ), ExtResource( 8 ) ],
 "loop": true,
 "name": "down",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 16 ), ExtResource( 18 ) ],
+"loop": false,
+"name": "darkening",
+"speed": 5.0
 } ]
 
-[sub_resource type="CircleShape2D" id=16]
+[sub_resource type="CircleShape2D" id=4]
 radius = 25.0
 
-[sub_resource type="AudioStreamRandomPitch" id=17]
+[sub_resource type="AudioStreamRandomPitch" id=5]
 audio_stream = ExtResource( 14 )
 
 [sub_resource type="AtlasTexture" id=6]
@@ -99,7 +114,7 @@ flags = 4
 atlas = ExtResource( 15 )
 region = Rect2( 600, 0, 100, 200 )
 
-[sub_resource type="SpriteFrames" id=18]
+[sub_resource type="SpriteFrames" id=13]
 animations = [ {
 "frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
@@ -117,15 +132,15 @@ position = Vector2( 0, 10 )
 texture = ExtResource( 13 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-material = SubResource( 14 )
+material = SubResource( 2 )
 position = Vector2( 0, -80 )
-frames = SubResource( 15 )
-animation = "down"
-frame = 1
+frames = SubResource( 3 )
+animation = "run_away"
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 16 )
+shape = SubResource( 4 )
 
 [node name="target" type="Sprite" parent="."]
 visible = false
@@ -152,15 +167,16 @@ iris_size = 10
 gravity = Vector2( 0, 100 )
 
 [node name="ForceSFX" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource( 17 )
+stream = SubResource( 5 )
 
 [node name="Force_push" type="AnimatedSprite" parent="."]
 visible = false
-material = SubResource( 14 )
+material = SubResource( 2 )
 position = Vector2( 0, -80 )
-frames = SubResource( 18 )
+frames = SubResource( 13 )
 animation = "push"
-frame = 6
+frame = 4
 playing = true
 
 [node name="Tween" type="Tween" parent="Force_push"]
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

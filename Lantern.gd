@@ -22,8 +22,8 @@ func darken(delta: float) -> void:
 	
 	charge_timer += delta
 	
-	var c := 1 - charge_timer / CHARGE_MAX
-	sprite.modulate = Color(c, c, c)
+#	var c := 1 - charge_timer / CHARGE_MAX
+#	sprite.modulate = Color(c, c, c)
 	
 	if charge_timer >= CHARGE_MAX:
 		dark.show()
@@ -37,12 +37,12 @@ func reset():
 		return
 	
 	charge_timer = 0
-	sprite.modulate = Color.white
+#	sprite.modulate = Color.white
 
 func dedark() -> void:
 	darkness_is_on = false
 	dark.hide()
-	sprite.modulate = Color.white
+#	sprite.modulate = Color.white
 	charge_timer = 0
 	$AudioStreamPlayer2D2.stop()
 

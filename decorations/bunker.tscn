@@ -7,7 +7,7 @@
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 2
 
-[node name="AT-ST" type="StaticBody2D"]
+[node name="bunker" type="StaticBody2D"]
 
 [node name="light" type="Sprite" parent="."]
 position = Vector2( 15.3634, -55.1825 )
@@ -19,8 +19,10 @@ position = Vector2( 15.3634, -55.1825 )
 texture = ExtResource( 3 )
 
 [node name="avoid" parent="." instance=ExtResource( 2 )]
+visible = false
 position = Vector2( 0.902527, -61.3701 )
 distance = 300.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PoolVector2Array( -305.752, 92.6107, -327.412, -28.3246, 357.586, -32.8371, 351.269, 91.7082 )

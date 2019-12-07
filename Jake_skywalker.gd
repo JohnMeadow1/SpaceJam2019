@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const DISTANCE_THRESHOLD: = 3.0
 const DARKSIDE_THRESHOLD: = 500.0
-export var max_speed: = 200.0
+export var max_speed: = 300.0
 
 var target_global_position: = Vector2.ZERO setget set_target_global_position
 var velocity: = Vector2.ZERO

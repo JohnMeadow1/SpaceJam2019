@@ -1,9 +1,17 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://images/Emperor-still.png" type="Texture" id=1]
 [ext_resource path="res://Flashlight.png" type="Texture" id=2]
 [ext_resource path="res://sounds/electricShock.ogg" type="AudioStream" id=3]
 [ext_resource path="res://images/Emperors_lightning.png" type="Texture" id=4]
+[ext_resource path="res://images/Emperor--walkright2.png" type="Texture" id=5]
+[ext_resource path="res://images/Emperor--walkright1.png" type="Texture" id=6]
+[ext_resource path="res://images/Emperor-walkleft2.png" type="Texture" id=7]
+[ext_resource path="res://images/Emperor-walkleft1.png" type="Texture" id=8]
+[ext_resource path="res://images/Emperor-walkback1.png" type="Texture" id=9]
+[ext_resource path="res://images/Emperor-walkback2.png" type="Texture" id=10]
+[ext_resource path="res://images/Emperor-walkfront2.png" type="Texture" id=11]
+[ext_resource path="res://images/Emperor-walkfront1.png" type="Texture" id=12]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D
@@ -60,6 +68,34 @@ func _input(event: InputEvent) -> void:
 			audio.stop()
 "
 
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "down",
+"speed": 5.0
+} ]
+
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 29.9979, 30.4397 )
 
@@ -73,7 +109,14 @@ stereo = true
 ]]
 script = SubResource( 1 )
 
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -70 )
+frames = SubResource( 4 )
+animation = "idle"
+playing = true
+
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
 position = Vector2( 0, -80 )
 texture = ExtResource( 1 )
 
@@ -98,8 +141,9 @@ stream = SubResource( 3 )
 attenuation = 0.217638
 
 [node name="Sprite2" type="Sprite" parent="."]
+visible = false
 position = Vector2( 4.84137, -126.653 )
 texture = ExtResource( 4 )
 
 [node name="DarkningSource" type="Position2D" parent="."]
-position = Vector2( 20.0139, -107.795 )
+position = Vector2( 24.9022, -63.7999 )

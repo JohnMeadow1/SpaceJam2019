@@ -46,11 +46,13 @@ func _physics_process(delta: float) -> void:
 			distance_to_edge = global_position - node.global_position
 			if distance_to_edge.length() - node.distance  <= 0:
 				velocity += distance_to_edge.normalized() / distance_to_edge.length_squared()
-			
+	
+	velocity += (global_position - darkside.global_position).normalized() / ((global_position - darkside.global_position).length_squared() + 1.0)
 	if global_position.distance_to(darkside.global_position) < DARKSIDE_THRESHOLD:
-
 		if abs(darkside.get_node("Light2D").rotation - (global_position - darkside.global_position).angle()) < PI/8.0:
-			run_away( (global_position - darkside.global_position) )
+			var new_direction = (global_position - darkside.global_position).tangent() * sign (darkside.get_node("Light2D").rotation - (global_position - darkside.global_position).angle())
+			run_away( new_direction )
+			
 			if !$neverJoin.playing:
 				$neverJoin.play()
 		

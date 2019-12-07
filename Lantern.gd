@@ -7,8 +7,8 @@ onready var dark: Node2D = $LightScale
 
 var dark_side_in: bool
 var charge_timer: float
-
-onready var size_in_pixels:float = $Sprite.texture.get_size().x * scale.x
+var darkness_is_on:bool = false
+onready var size_in_pixels:float = $LightScale/Light2D.texture.get_size().x * scale.x
 
 func darken(delta: float) -> void:
 	charge_timer += delta
@@ -18,7 +18,7 @@ func darken(delta: float) -> void:
 	
 	if charge_timer >= CHARGE_MAX:
 		dark.show()
-#		size_in_pixels = $Sprite.texture.get_size().x * scale.x
+		darkness_is_on = true
 
 func reset():
 	charge_timer = 0

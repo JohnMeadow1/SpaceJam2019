@@ -11,4 +11,5 @@ func set_marker (value):
 	update()
 	
 func _draw():
-	draw_circle(Vector2.ZERO, avoid_distance, Color(1,0,0,0.3) )
+	if Engine.editor_hint:
+		draw_circle(Vector2.ZERO, avoid_distance, Color(1,0,0,0.3) )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Jake_skywalker.gd" type="Script" id=1]
 [ext_resource path="res://sounds/illNeverJoinTheDarkSide.wav" type="AudioStream" id=2]
@@ -14,16 +14,35 @@
 [ext_resource path="res://eyes/eye.tscn" type="PackedScene" id=12]
 [ext_resource path="res://background/Luke-www.png" type="Texture" id=13]
 
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+uniform float power : hint_range(0, 1);
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	float gray = (color.r + color.g + color.b) / 6.0;
+	
+	float result = ceil(1.0 - power - UV.y);
+	
+	COLOR = mix(vec4(gray, gray, gray, color.a), color, result);
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+resource_local_to_scene = true
+shader = SubResource( 3 )
+shader_param/power = 0.0
+
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 5 ), ExtResource( 7 ) ],
-"loop": true,
-"name": "right",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 9 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "right",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 10 ), ExtResource( 6 ) ],
@@ -48,6 +67,7 @@ position = Vector2( 0, 10 )
 texture = ExtResource( 13 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 4 )
 position = Vector2( 0, -80 )
 frames = SubResource( 1 )
 animation = "down"

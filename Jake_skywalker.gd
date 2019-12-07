@@ -4,6 +4,8 @@ const DISTANCE_THRESHOLD: = 30.0
 const DARKSIDE_THRESHOLD: = 500.0
 export var max_speed: = 300.0
 
+const MAX_DARKNESS = 100.0
+
 var target_global_position: = Vector2.ZERO setget set_target_global_position
 var velocity: = Vector2.ZERO
 
@@ -59,8 +61,7 @@ func _physics_process(delta: float) -> void:
 			var new_direction = (global_position - darkside.global_position).tangent() * sign (darkside.get_node("Light2D").rotation - (global_position - darkside.get_node("Light2D").global_position).angle())
 			run_away( new_direction + (global_position - darkside.get_node("Light2D").global_position) )
 			darkness += 1
-			$Label.text = str(darkness)
-			if !$neverJoin.playing && darkness >100 :
+			if !$neverJoin.playing && darkness >MAX_DARKNESS :
 				darkness = 0
 				$neverJoin.play()
 				get_dark()
@@ -70,6 +71,8 @@ func _physics_process(delta: float) -> void:
 	$target.global_position = target_global_position
 	velocity = move_and_slide(velocity)
 	rotate_actor()
+	
+	$AnimatedSprite.material.set_shader_param("power", darkness / MAX_DARKNESS)
 	
 func get_dark():
 	timeout = rand_range(2.0,3.0)

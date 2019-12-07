@@ -58,6 +58,18 @@ func get_push(direction) -> void:
 	got_pushed = true
 	pushed_force = direction * 5
 	
+	if !$AudioStreamPlayer2D4.playing:
+		if randi() % 3 != 0:
+			return
+		
+		$AudioStreamPlayer2D4.stream = [
+			preload("res://sounds/goodHateFlow.wav"),
+			preload("res://sounds/good.wav"),
+			preload("res://sounds/darkMonologue.wav"),
+			preload("res://sounds/emperorSith.wav")
+		][randi() % 4]
+		$AudioStreamPlayer2D4.play()
+	
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed and event.is_action("unlimited_power") and not darkning:

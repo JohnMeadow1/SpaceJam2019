@@ -24,7 +24,10 @@ func _physics_process(delta: float) -> void:
 #		timer = 0.0
 #		timeout = rand_range(1.5,2.5)
 #		set_new_target()
-		
+	timer += delta * 3470
+	$eyes.position.y = sin(timer)*1
+	$eyes.position.x = cos(timer)*1
+	
 	if Input.is_action_pressed("click"):
 		self.target_global_position = get_global_mouse_position()
 		
@@ -47,7 +50,7 @@ func _physics_process(delta: float) -> void:
 			
 	if global_position.distance_to(darkside.global_position) < DARKSIDE_THRESHOLD:
 #		print (darkside.rotation - (global_position - darkside.global_position).angle())
-		if abs(darkside.rotation - (global_position - darkside.global_position).angle()) < PI/4.0:
+		if abs(darkside.rotation - (global_position - darkside.global_position).angle()) < PI/8.0:
 			run_away( (global_position - darkside.global_position) )
 			if !$neverJoin.playing:
 				$neverJoin.play()

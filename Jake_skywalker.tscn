@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Jake_skywalker.gd" type="Script" id=1]
 [ext_resource path="res://sounds/illNeverJoinTheDarkSide.wav" type="AudioStream" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://images/Luke-walkleft1.png" type="Texture" id=9]
 [ext_resource path="res://images/Luke-walkback1.png" type="Texture" id=10]
 [ext_resource path="res://images/Luke-walkfront1.png" type="Texture" id=11]
+[ext_resource path="res://eyes/eye.tscn" type="PackedScene" id=12]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -57,3 +58,16 @@ texture = ExtResource( 3 )
 
 [node name="neverJoin" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
+
+[node name="eyes" type="Node2D" parent="."]
+visible = false
+
+[node name="eye" parent="eyes" instance=ExtResource( 12 )]
+position = Vector2( -5.20918, -164.199 )
+eye_size = 25
+iris_size = 15
+
+[node name="eye2" parent="eyes" instance=ExtResource( 12 )]
+position = Vector2( 10.4331, -164.199 )
+eye_size = 20
+iris_size = 10

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
 var from: Vector2 setget set_from
@@ -14,13 +14,13 @@ func set_from(f):
 	upd()
 
 func upd():
-	$Rect.rect_size.y = 256
+#	$Rect.rect_size.y = 256
 	global_position = from
 	rotation = (to - from).angle()
 	$Rect.rect_size.x = (to - from).length()
 "
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
 
 // plot function 
@@ -60,33 +60,34 @@ void fragment(){
 	float pct ;
 	float buffer;	
 	// add more lightning
+	vec2 uv2 = vec2(uv.x, (uv.y-0.5)/uv.x+0.5);
 	int lightning_number = 5;
 	for ( int i = 0; i < lightning_number; i++){
-		t = uv * vec2(2.0,1.0) + vec2(float(i), -float(i)) - TIME*3.0;
+		t = uv2 * vec2(2.0,1.0) + vec2(float(i), -float(i)) - TIME*3.0;
 		y = fbm(t)*0.5;
-		pct = plot(uv, y, 0.02);
-		buffer = plot(uv, y, 0.08);
-		color += pct*vec4(0.0, 0.0, 1.0, 1.0);
+		pct = plot(uv2, y, 0.02)*(1.0-uv.x);
+		buffer = plot(uv2, y, 0.08);
+		color += pct*vec4(0.1, 0.5, 1.0, 1.0);
 		color += buffer*vec4(0.2, 0, 0.8, 0.0);
 	}
 	
 	COLOR = color;
 }"
 
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
 
 [node name="Darkning" type="Node2D"]
 z_index = 10
-script = SubResource( 3 )
+script = SubResource( 1 )
 
 [node name="Rect" type="ColorRect" parent="."]
-material = SubResource( 2 )
+material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -128.0
+margin_top = -150.0
 margin_right = 800.0
-margin_bottom = 128.0
+margin_bottom = 150.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

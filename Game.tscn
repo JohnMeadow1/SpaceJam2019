@@ -50,6 +50,14 @@ tile_data = PoolIntArray( -2752558, 8, 0, -2752557, 8, 0, -2752556, 8, 0, -27525
 [node name="Vader" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 230.011, 448.332 )
 
+[node name="Camera2D" type="Camera2D" parent="YSort/Vader"]
+current = true
+limit_left = -1250
+limit_top = -1050
+limit_right = 2200
+limit_bottom = 1600
+editor_draw_limits = true
+
 [node name="Lantern4" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( -57.0838, -504.378 )
 

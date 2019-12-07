@@ -45,6 +45,5 @@ func dedark() -> void:
 	charge_timer = 0
 	$AudioStreamPlayer2D2.stop()
 
-
 func _on_AnimatedSprite_animation_finished() -> void:
 	$AnimatedSprite.hide()

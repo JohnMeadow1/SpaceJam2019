@@ -11,6 +11,10 @@ var charge_timer: float
 var darkness_is_on:bool = false
 onready var size_in_pixels:float = $LightScale/Light2D.texture.get_size().x * scale.x
 
+func _ready():
+	$Light.flip_h = randi()%2
+	$Dark.flip_h = $Light.flip_h
+
 func darken(delta: float) -> void:
 	if not $AnimatedSprite.visible:
 		$AnimatedSprite.frame = 0

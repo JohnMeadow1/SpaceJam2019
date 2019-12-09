@@ -2,6 +2,10 @@ extends StaticBody2D
 
 var player_in: bool
 
+func _ready():
+	$light.flip_h = bool(randi()%2)
+	$dark.flip_h = $light.flip_h
+
 func _process(delta: float) -> void:
 	if player_in:
 		if modulate.a > 0.3:

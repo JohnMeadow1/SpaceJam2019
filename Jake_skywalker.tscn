@@ -57,14 +57,14 @@ animations = [ {
 "name": "up",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 18 ), ExtResource( 20 ), ExtResource( 18 ), ExtResource( 19 ) ],
-"loop": true,
-"name": "run_away",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 11 ), ExtResource( 8 ) ],
 "loop": true,
 "name": "down",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 18 ), ExtResource( 20 ), ExtResource( 18 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "run_away",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 17 ), ExtResource( 16 ), ExtResource( 18 ) ],
@@ -136,7 +136,7 @@ material = SubResource( 2 )
 position = Vector2( 0, -80 )
 frames = SubResource( 3 )
 animation = "run_away"
-frame = 3
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -175,8 +175,11 @@ material = SubResource( 2 )
 position = Vector2( 0, -80 )
 frames = SubResource( 13 )
 animation = "push"
-frame = 2
+frame = 5
 playing = true
 
 [node name="Tween" type="Tween" parent="Force_push"]
+
+[node name="head" type="Position2D" parent="."]
+position = Vector2( 0, -150 )
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

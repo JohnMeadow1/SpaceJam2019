@@ -12,3 +12,8 @@ func set_count(c: int):
 	
 	if c == full_counter:
 		get_tree().create_timer(12).connect("timeout", get_tree(), "change_scene", ["res://OverGame.tscn"])
+
+func _input(event):
+	if event is InputEventKey:
+		if event.pressed and event.scancode == KEY_F1:
+			set_count(full_counter)

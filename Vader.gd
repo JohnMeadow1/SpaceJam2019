@@ -15,6 +15,7 @@ var got_pushed := false
 var pushed_force = Vector2()
 var is_flashlight_on := false
 var stun_timer = 0 
+
 func _process(delta: float) -> void:
 	$Light2D.rotation = (get_global_mouse_position() - $Light2D.global_position).angle()
 	if stun_timer >0:
@@ -48,7 +49,9 @@ func _process(delta: float) -> void:
 		target.darken(delta)
 	
 	if (Input.is_action_pressed("click") or Input.is_action_pressed("unlimited_power")) and not is_inside_lantern():
+		stun_timer = 0.1
 		stamina = max(stamina - delta, 0)
+
 	elif stun_timer<=0:
 		stamina = min(stamina + delta * 2, MAX_STAMINA)
 	$AnimatedSprite.material.set_shader_param("power", stamina / MAX_STAMINA);
@@ -93,7 +96,8 @@ func _input(event: InputEvent) -> void:
 				get_parent().add_child(darkning)
 				audio.play()
 				if randi() % 3 == 0:
-					audio2.play()
+					if !$AudioStreamPlayer2D3.playing && !$AudioStreamPlayer2D4.playing && !$AudioStreamPlayer2D5.playing && !$AudioStreamPlayer2D6.playing:
+						audio2.play()
 		
 		if not event.pressed and event.is_action("unlimited_power") and darkning:
 			remove_dark()

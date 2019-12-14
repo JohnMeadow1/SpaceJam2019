@@ -10,6 +10,7 @@
 script/source = "extends Spatial
 
 var text_started = false
+var next_level = preload(\"res://Game.tscn\")
 
 func _process(delta: float) -> void:
 	if text_started:
@@ -20,7 +21,12 @@ func start_text():
 	get_tree().create_timer(38).connect(\"timeout\", self, \"end\")
 
 func end():
-	get_tree().change_scene(\"res://Game.tscn\")
+	get_tree().change_scene_to(next_level)
+	
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.pressed and event.scancode == KEY_ESCAPE:
+			get_tree().change_scene_to(next_level)
 "
 
 [sub_resource type="ViewportTexture" id=2]

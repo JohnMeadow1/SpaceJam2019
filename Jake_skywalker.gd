@@ -73,10 +73,10 @@ func _physics_process(delta: float) -> void:
 		
 	if darkside.is_flashlight_on and lifes > 0:
 	#	velocity += (global_position - darkside.get_node("Light2D").global_position).normalized() / ((global_position - darkside.get_node("Light2D").global_position).length() + 1.0)
-		if global_position.distance_to(darkside.get_node("Light2D").global_position) < DARKSIDE_THRESHOLD:
-			if abs(darkside.get_node("Light2D").rotation - (global_position - darkside.get_node("Light2D").global_position).angle()) < PI/4.0:
-				var new_direction = (global_position - darkside.global_position).tangent() * sign (darkside.get_node("Light2D").rotation - (global_position - darkside.get_node("Light2D").global_position).angle())
-				run_away( new_direction + (global_position - darkside.get_node("Light2D").global_position) )
+		if $head.global_position.distance_to(darkside.get_node("Light2D").global_position) < DARKSIDE_THRESHOLD:
+			if abs(darkside.get_node("Light2D").rotation - ($head.global_position - darkside.get_node("Light2D").global_position).angle()) < PI/4.0:
+				var new_direction = (global_position - darkside.global_position).tangent() * sign (darkside.get_node("Light2D").rotation - ($head.global_position - darkside.get_node("Light2D").global_position).angle())
+				run_away( new_direction + ($head.global_position - darkside.get_node("Light2D").global_position) )
 				darkness += 1
 				if !$neverJoin.playing && darkness >MAX_DARKNESS :
 					lifes -= 1
@@ -135,7 +135,7 @@ func set_new_target():
 	var valid_target = false
 	for i in 1000: 
 		valid_target = true
-		target = Vector2( rand_range(0, 2500), rand_range(0, 2000) )
+		target = Vector2( rand_range(100, 2500), rand_range(200, 2000) )
 		for node in get_tree().get_nodes_in_group("light"):
 			if node.darkness_is_on:
 				if (node.global_position - target).length() <= node.size_in_pixels:
